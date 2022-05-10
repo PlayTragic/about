@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Carter+One&family=Changa:wght@500&family=IBM+Plex+Sans+KR:wght@400;600&family=Permanent+Marker&family=Russo+One&family=Ubuntu:wght@400;500;700&display=swap');
+
+:root{
+    --dark-bg: #0f2027;
+    --light-bg: #abdbd7;
+    --dark-txt: #0f2027;
+    --light-txt: #DEF1EF;
+    --point: #9DD7D1;
+    --dark-point: #060807;
+    --txt: #001C19;
+    --card-bg: #003034;
+}
+.carter{font-family: 'Carter One', cursive;}
+.changa{font-family: 'Changa', sans-serif;}
+.permanent{font-family: 'Permanent Marker', cursive;}
+.russo{font-family: 'Russo One', sans-serif;}
+
+.darkbg{
+    background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+    background-blend-mode: multiply;
+}
+button{
+    width: 3em;
+    height: 3em;
+    position:fixed;
+    color: var(--light-txt);
+    background-color: var(--dark-bg);
+    margin: 1em;
+    border:none;
+}
+button:hover{
+    color: var(--dark-txt);
+    background-color: var(--light-bg);
+    border: none;
+}
+body{
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+    background-size: cover;
+    border: none;
+}
+
+div #colheader {
+    background-image: url(https://images.unsplash.com/photo-1532787799187-93655e51d472);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 60%;
+    background-attachment: fixed;
+    min-height: 10em;
+    padding: 0;
+    margin: 5em 0 0 0;
+    box-shadow: 0.2em 0.2em 0 #1e3a2920;
+}
+
+#colheader h1{
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    text-align: center;
+    color: var(--light-txt);
+    text-shadow: 0 0 0.2em var(--point);
+    font-size:4em;
+}
+.container {
+    width: auto;
+}
+.text-decoration-none a:hover{
+    text-decoration: none;
+}
+#colheader ul{
+    position: absolute;
+    top:80%;
+    width: 100%;
+    text-align: center;
+}
+#colheader a{
+    color: var(--point);
+}
+#colheader a:hover{
+    color: var(--point);
+    text-shadow: 0 0 5px var(--point);
+}
+div #colmid{
+    min-height: 30em;
+    padding: 1em;
+    margin: 1em 0 0 0;
+}
+div .col-4{
+    color: var(--light-txt);
+    background: linear-gradient(to left, #0f2027, #203a43, #2c5364);
+    background-size: auto 100%;
+    background-position: center center;
+    opacity: 1;
+    border-right: var(--dark-txt) dashed 2px;
+    overflow: hidden;
+}
+#colmid ul{
+font-family: 'Ubuntu', sans-serif;
+letter-spacing: 0.1em;
+padding: 0 0 0 1em ;
+list-style-type: '>';
+font-weight: 500;
+}
+div #colmid{
+    background-color: var(--dark-bg);
+}
+
+.col{
+    color:var(--light-txt);
+    font-family: 'IBM Plex Sans KR', sans-serif;
+
+    
+}
+.row{
+ width: auto;
+}
+div #colfoot {
+
+    min-height: 10em;
+    font-family: 'Pacifico', cursive;
+    padding: 0;
+    margin: 1em 0 0 0;
+    background-image: linear-gradient(60deg, #96deda 0%, #50c9c3 100%);
+
+    box-shadow: 0.2em 0.2em 0 #1e3a2920;
+}
+
+#colfoot h1{
+    position: absolute;
+    top: 35%;
+    width: 100%;
+    text-align: center;
+    color: var(--dark-txt);
+    font-family: 'Russo One', sans-serif;
+}
+
+#colmid span{
+    font-size: 1.5em;
+    font-weight: 700;
+    margin: 0.2em 0;
+    display: block;
+    letter-spacing: 0.3em;
+    border-bottom: solid 0.2em var(--light-txt);
+    color: var(--light-txt);
+}
+
+.colscroll{
+    overflow-y: scroll;
+    max-height: 11em;
+    color: var(--light-txt);
+
+}
+
+.colscroll{
+    scrollbar-width: auto;
+    scrollbar-color: var(--point) var(--dark-bg);
+  }
+
+  .colscroll::-webkit-scrollbar {
+    width: 0.4em;
+
+  }
+
+  .colscroll::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+  }
+
+  .colscroll::-webkit-scrollbar-thumb {
+    background-color: var(--point);
+    border: 0px;
+  }
+
+  .card {
+    box-shadow: 2px 2px 5px rgb(0, 0, 0);
+
+    background: var(--card-bg);
+    margin: 0 0.5em 0 0;
+    color: var(--light-txt);
+  
+  }
+  
+  .card-body {
+    background: var(--card-bg);
+  }
+  
+  .card-footer {
+    background: var(--card-bg);
+
+  }
+  
+  .card-header {
+    border: 0px;
+    background: var(--card-bg);
+  }
+.card-title{
+    font-weight:700;
+}
