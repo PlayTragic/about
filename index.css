@@ -5,7 +5,7 @@
     --light-bg: #abdbd7;
     --dark-txt: #0f2027;
     --light-txt: #DEF1EF;
-    --point: #9DD7D1;
+    --point: #84c7c0;
     --dark-point: #060807;
     --txt: #001C19;
     --card-bg: #003034;
@@ -99,9 +99,11 @@ div .col-4{
 #colmid ul{
 font-family: 'Ubuntu', sans-serif;
 letter-spacing: 0.1em;
-padding: 0 0 0 1em ;
-list-style-type: '>';
+padding: 0 0 0 1.5em ;
+list-style-type: '🌊';
 font-weight: 500;
+line-height: 1.6em;
+
 }
 div #colmid{
     background-color: var(--dark-bg);
@@ -123,7 +125,6 @@ div #colfoot {
     padding: 0;
     margin: 1em 0 0 0;
     background-image: linear-gradient(60deg, #96deda 0%, #50c9c3 100%);
-
     box-shadow: 0.2em 0.2em 0 #1e3a2920;
 }
 
@@ -139,11 +140,11 @@ div #colfoot {
 #colmid span{
     font-size: 1.5em;
     font-weight: 700;
-    margin: 0.2em 0;
+    margin: 0.2em 0 0.5em 0;
     display: block;
     letter-spacing: 0.3em;
     border-bottom: solid 0.2em var(--light-txt);
-    color: var(--light-txt);
+    color: var(--point);
 }
 
 .colscroll{
