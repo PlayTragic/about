@@ -19,7 +19,7 @@
     background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
     background-blend-mode: multiply;
 }
-button{
+.corner {
     width: 3em;
     height: 3em;
     position:fixed;
@@ -28,10 +28,20 @@ button{
     margin: 1em;
     border:none;
 }
-button:hover{
+.corner:hover{
     color: var(--dark-txt);
     background-color: var(--light-bg);
     border: none;
+}
+.transb{
+    color: var(--dark-txt);
+    background: var(--point);
+    border:none;
+}
+.transb:hover{
+    color: var(--light-txt);
+    background: var(--dark-point);
+    border:none;
 }
 body{
     height: 100vh;
@@ -40,6 +50,7 @@ body{
     background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
     background-size: cover;
     border: none;
+    
 }
 
 div #colheader {
@@ -56,12 +67,12 @@ div #colheader {
 
 #colheader h1{
     position: absolute;
-    top: 20%;
+    top: 35%;
     width: 100%;
     text-align: center;
     color: var(--light-txt);
     text-shadow: 0 0 0.2em var(--point);
-    font-size:4em;
+
 }
 .container {
     width: auto;
@@ -83,7 +94,6 @@ div #colheader {
     text-shadow: 0 0 5px var(--point);
 }
 div #colmid{
-    min-height: 30em;
     padding: 1em;
     margin: 1em 0 0 0;
 }
@@ -107,6 +117,7 @@ line-height: 1.6em;
 }
 div #colmid{
     background-color: var(--dark-bg);
+    max-height: 35em;
 }
 
 .col{
@@ -137,7 +148,7 @@ div #colfoot {
     font-family: 'Russo One', sans-serif;
 }
 
-#colmid span{
+span.divider{
     font-size: 1.5em;
     font-weight: 700;
     margin: 0.2em 0 0.5em 0;
@@ -149,7 +160,6 @@ div #colfoot {
 
 .colscroll{
     overflow-y: scroll;
-    max-height: 11em;
     color: var(--light-txt);
 
 }
@@ -175,26 +185,21 @@ div #colfoot {
 
   .card {
     box-shadow: 2px 2px 5px rgb(0, 0, 0);
-
+    margin: 1em;
     background: var(--card-bg);
-    margin: 0 0.5em 0 0;
     color: var(--light-txt);
+    max-width: 18em;
   
   }
-  
-  .card-body {
-    background: var(--card-bg);
-  }
-  
-  .card-footer {
-    background: var(--card-bg);
 
-  }
-  
-  .card-header {
-    border: 0px;
-    background: var(--card-bg);
-  }
 .card-title{
     font-weight:700;
+}
+
+span.marked{
+    padding: 0.1em 0.2em;
+    margin: 0.1em;
+    background-color: var(--point);
+    color: var(--dark-txt);
+    font-weight: 600;
 }
