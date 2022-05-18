@@ -172,9 +172,6 @@ function assignFont(letter){
 }
 randomArray = txtArray.map(assignFont);
 htmlArray = randomArray.join('');
-
-console.log(htmlArray);
-
-document.querySelector('span').innerHTML=htmlArray;
+document.querySelector('span.randomfont').innerHTML=htmlArray;
   </script>
   </html>
