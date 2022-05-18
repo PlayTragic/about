@@ -67,8 +67,8 @@ div #colheader {
 
 #colheader h1{
     position: absolute;
-    top: 35%;
     width: 100%;
+    margin-top: 1.2em;
     text-align: center;
     color: var(--light-txt);
     text-shadow: 0 0 0.2em var(--point);
@@ -125,9 +125,6 @@ div #colmid{
     font-family: 'IBM Plex Sans KR', sans-serif;
 
     
-}
-.row{
- width: auto;
 }
 div #colfoot {
 
@@ -198,7 +195,7 @@ span.divider{
 
 span.marked{
     padding: 0.1em 0.2em;
-    margin: 0.1em;
+    margin: 0.2em;
     background-color: var(--point);
     color: var(--dark-txt);
     font-weight: 600;

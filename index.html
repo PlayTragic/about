@@ -26,19 +26,7 @@
 
         <div class="row">
           <div class="col" id="colheader">
-            <h1 class="text-center">
-              <span class="russo">M</span><span class="changa">a</span><span
-                class="changa">L</span><span class="changa">w</span><span
-                class="permanent">A</span><span class="permanent">r</span><span
-                class="permanent">E&nbsp;</span> <span class="russo">(</span><span
-                class="permanent">n</span><span class="russo">e</span><span
-                class="carter">w&nbsp;</span> <span class="permanent">A</span><span
-                class="permanent">r</span><span class="permanent">i</span><span
-                class="russo">n&nbsp;</span><span class="changa">E</span><span
-                class="carter">D</span><span class="carter">I</span><span
-                class="permanent">t</span><span class="russo">I</span><span
-                class="russo">O</span><span class="carter">n</span><span
-                class="carter">)</span>‽‽‽</h1>
+            <h1 class="text-center"><span class="randomfont">MaLwArE  (new  Arin EDItIOn)‽‽‽</span></h1>
             <ul class="list-inline text-decoration-none">
 
               <li class="list-inline-item"> <a href="/" data-toggle="tooltip"
@@ -53,17 +41,17 @@
             </ul>
           </div>
         </div>
-        <div class="row"><div class="col-4 text-monospace scanlines"
+        <div class="row"><div class="col-4 text-monospace"
             id="colmid">
             <span class="divider"><i class="fa-solid fa-user"></i> info</span>
-            <ul class="info text-right">
+            <ul class="info text-right text-wrap">
               <li class="infoX">21</li>
               <li class="infoX">intp</li>
               <li class="infoX">sagittarius ♐</li>
               <li class="infoX">trilingual (ENG/KR/PH)</li>
             </ul>
             <span class="divider"><i class="fa-solid fa-heart"></i> interests</span>
-            <ul class="info text-right">
+            <ul class="info text-right text-wrap">
               <li class="infoX">music packaging design</li>
               <li class="infoX">roguelike games</li>
               <li class="infoX">cassettes</li>
@@ -155,5 +143,38 @@
       txt.innerHTML = "Hi, I'm a currently employed webdev primarily doing frontend and a hobbyist print designer. <br><br> I use HTML5, CSS3, lots of searching on the internet and VSCode to make sites. <br> For design work I work in Illustrator but I can work with Photoshop as well. <br><br> I'm interested in learning more about backend dev stuff as well as Python. <br><br> Other than designing prints I also dabble in editing and am in the process of making a video essay. <br><br> Most of my personal projects are inspired by the music I listen to and albums I've enjoyed. Here's a few recomendations to get into my headspace."
     }
   }
+
+  const randomTxt = document.querySelector('span.randomfont').innerHTML;
+let txtArray = randomTxt.split('');
+
+function RNG(){
+    Math.floor((Math.random() * 100) % 4) + 1;
+} 
+
+function assignFont(){
+
+}
+
+let randomNum;
+
+function RNG(){
+    randomNum = (Math.floor((Math.random() * 100))) % 4 + 1 ;
+} 
+
+function assignFont(letter){
+    RNG();
+    switch (randomNum){
+        case 1: return `<span class="carter">${letter}</span>`;
+        case 2: return `<span class="changa">${letter}</span>`;
+        case 3: return `<span class="permanent">${letter}</span>`;
+        case 4: return `<span class="russo">${letter}</span>`;
+    }
+}
+randomArray = txtArray.map(assignFont);
+htmlArray = randomArray.join('');
+
+console.log(htmlArray);
+
+document.querySelector('span').innerHTML=htmlArray;
   </script>
   </html>
