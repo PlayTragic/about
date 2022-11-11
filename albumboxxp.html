@@ -8,6 +8,8 @@
 
     <link rel="stylesheet" href="https://unpkg.com/xp.css">
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     
     <style>
     .album-image img{
@@ -49,19 +51,29 @@
     .chart-row img{
         min-width: 150px;
         min-height: 150px;
-        padding: 0.5vw;
     }
     .chart-img-one img{
         width: 18vw;
         height: 18vw;
+        padding: 0.5vw;
     }
     .chart-img-two img{
         width: 15vw;
         height: 15vw;
+        padding: 0.25vw;
     }
     .chart-img-three img{
-        width: 8vw;
-        height: 8vw;
+        width: 9vw;
+        height: 9vw;
+        padding: 0.1vw;
+    }
+    .modal a.close-modal {
+        display: none;
+    }
+    .modal{
+        width: auto;
+        padding: 0;
+        background: none;
     }
     </style>
 </head>
@@ -95,11 +107,43 @@
             </div>
         </div>
     </div>
+    <div class="chart-popup">
+        <div id="feverdream" class="modal">
+            <div class="window" style="width: 300px;">
+                <div class="title-bar">
+                    <div class="title-bar-text">Details: FEVER DREAM</div>
+                    <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                </div>
+                <div class="album-image">
+                    <img src="https://f4.bcbits.com/img/a0930597781_10.jpg" alt="test img">
+                </div>
+                <div class="status-bar">
+                    <p class="status-bar-field">Fiend</p>
+                    <p class="status-bar-field">FEVER DREAM</p>
+                    <p class="status-bar-field">2019 - 10 - 15</p>
+                </div>
+                <div class="window-body">
+                    <p>
+                        I don't even know how I came across this album but man, I am SO glad I did. Though this is one of the more recent finds in the 'persistent picks' category I have been so enamored and obsessed with how Fiend distorts the samples, layer on and play with the drums. And I love how capturing the whole project is despite not sounding as intense or melancholic as most breakcore songs out there.
+                    </p>
+                    <div class="album-button">
+                     <button onclick="window.open('https://fiend.bandcamp.com/album/fever-dream', '_blank')">Bandcamp</button>
+                    </div>
+                </div>
+                <div class="status-bar">
+                    <p class="status-bar-field">persistent picks</p>
+                    <p class="status-bar-field">Electronic</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="chart-container">
         <h2>ROW ONE</h2>
         <div class="chart-row" id="row-one">
             <div class="chart-img-one">
+                <a href="#feverdream" rel="modal:open">
                 <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+                </a>
             </div>
             <div class="chart-img-one">
                 <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
