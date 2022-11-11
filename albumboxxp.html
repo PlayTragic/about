@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link
-    rel="stylesheet"
-    href="https://unpkg.com/xp.css"
-  >
-<style>
+
+    <link rel="stylesheet" href="https://unpkg.com/xp.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    
+    <style>
     .album-image img{
         display: block;
         margin: 8px auto;
@@ -34,108 +34,197 @@
     .album-button{
         text-align: center;
     }
-</style>
+    #chart-container{
+        text-align: center;
+    }
+    #header-box{
+        margin: 5vh auto;
+        max-width: 700px;
+    }
+    .chart-row{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .chart-img-one img{
+        width: 18vw;
+        height: 18vw;
+        min-width: 250px;
+        min-height: 250px;
+        padding: 0.5vw;
+    }
+    .chart-img-two img{
+        width: 15vw;
+        height: 15vw;
+        min-width: 200px;
+        min-height: 200px;
+        padding: 0.5vw;
+    }
+    .chart-img-three img{
+        width: 8vw;
+        height: 8vw;
+        min-width: 150px;
+        min-height: 150px;
+        padding: 0.5vw;
+    }
+    </style>
 </head>
 <body>
-    <div class="window" style="width: 300px;">
-        <div class="title-bar">
-            <div class="title-bar-text">Details: TESTBOX</div>
-            <div class="title-bar-controls"><button aria-label="Close"></button></div>
-        </div>
-        <div class="album-image">
-            <img src="https://64.media.tumblr.com/badf84155d3250604be60289f5b764f2/a15c9e82a89a3ada-d7/s1280x1920/4d5b7c16ed7ba7bdc7f5359a86be00eca2b0e2e0.jpg" alt="test img">
-        </div>
-        <div class="status-bar">
-            <p class="status-bar-field">BOX1</p>
-            <p class="status-bar-field">BOX2</p>
-            <p class="status-bar-field">1993 - 09 - 01</p>
-        </div>
-        <div class="window-body">
-            <p>Eternal September or the September that never ended is Usenet slang for a period beginning in September 1993, the month that Internet service provider America Online began offering Usenet access to its many users, overwhelming the existing culture for online forums.
-            </p>
-        </div>
-        <div class="status-bar">
-            <p class="status-bar-field">LONG ASS CATEGORY</p>
-            <p class="status-bar-field">BOX3</p>
-        </div>
-    </div>
-    <br><br>
-    <div class="window" style="width: 300px;">
-        <div class="title-bar">
-            <div class="title-bar-text">Details: FEVER DREAM</div>
-            <div class="title-bar-controls"><button aria-label="Close"></button></div>
-        </div>
-        <div class="album-image">
-            <img src="https://f4.bcbits.com/img/a0930597781_10.jpg" alt="test img">
-        </div>
-        <div class="status-bar">
-            <p class="status-bar-field">Fiend</p>
-            <p class="status-bar-field">FEVER DREAM</p>
-            <p class="status-bar-field">2019 - 10 - 15</p>
-        </div>
-        <div class="window-body">
-            <p>
-                I don't even know how I came across this album but man, I am SO glad I did. Though this is one of the more recent finds in the 'persistent picks' category I have been so enamored and obsessed with how Fiend distorts the samples, layer on and play with the drums. And I love how capturing the whole project is despite not sounding as intense or melancholic as most breakcore songs out there.
-            </p>
-            <div class="album-button">
-             <button onclick="window.open('https://fiend.bandcamp.com/album/fever-dream', '_blank')">Bandcamp</button>
-            </div>
-        </div>
-        <div class="status-bar">
-            <p class="status-bar-field">persistent picks</p>
-            <p class="status-bar-field">Electronic</p>
-        </div>
-    </div>
-<br>
-    <div class="window" style="width: 700px;">
-        <div class="title-bar">
-            <div class="title-bar-text">FULL TIME PROGRAMMER, PART-TIME MUSIC ENJOYER, BORN HATER</div>
-            <div class="title-bar-controls"><button aria-label="Minimize"></button>
-            <div class="title-bar-controls"><button aria-label="Close"></button>
-            </div>
-        </div>
-        </div>
-        <div class="window-body">
-            <div class="userbox">
-                <div class="userbox-img">
-                    <img src="https://64.media.tumblr.com/e3998fa7162bb6cb5aaf057546c03d68/af992c40b299732a-38/s1280x1920/9b221d6c65ada506b9a19284dadd59ffca428842.png" alt="avatar">
+    <div id="header-container">
+        <div class="window" id="header-box">
+            <div class="title-bar">
+                <div class="title-bar-text">PART-TIME MUSIC ENJOYER, BORN HATER</div>
+                <div class="title-bar-controls"><button aria-label="Minimize"></button>
+                <div class="title-bar-controls"><button aria-label="Close"></button>
                 </div>
-                <p>
-                    hi, im the owner of this page further refered as (think of a nickname), a 20 something semi-music nerd.<br>
-                    this is my topster! <br>
-                    feel free to look around and click on any albums you're curious about. maybe filter through them if you're overwhelmed. 
-                </p>
             </div>
-            <div class="userbox-buttons">
-                <button class="categoryFilter" id="category1">CATEGORY 1</button>
-                <button class="categoryFilter" id="category2">CATEGORY 2</button>
-                <button class="categoryFilter" id="category3">CATEGORY 3</button>
-                <button disabled id="resetButton">RESET</button>
+            </div>
+            <div class="window-body">
+                <div class="userbox">
+                    <div class="userbox-img">
+                        <img src="https://64.media.tumblr.com/e3998fa7162bb6cb5aaf057546c03d68/af992c40b299732a-38/s1280x1920/9b221d6c65ada506b9a19284dadd59ffca428842.png" alt="avatar">
+                    </div>
+                    <p>
+                        hi, im the owner of this page further refered as (think of a nickname), a 20 something semi-music nerd.<br>
+                        this is my topster! <br>
+                        feel free to look around and click on any albums you're curious about. maybe filter through them if you're overwhelmed. 
+                    </p>
+                </div>
+                <div class="userbox-buttons">
+                    <button class="categoryFilter" id="category1">CATEGORY 1</button>
+                    <button class="categoryFilter" id="category2">CATEGORY 2</button>
+                    <button class="categoryFilter" id="category3">CATEGORY 3</button>
+                    <button disabled id="resetButton">RESET</button>
+                </div>
             </div>
         </div>
     </div>
-    <script>
-        let categorySelected = false;
-        let resetButton = document.getElementById('resetButton');
-        let filterButton = document.querySelector('.userbox-buttons');
-        filterButton.addEventListener('click', checkClick);
-        function checkClick(){
-
-            if(event.target.className === 'categoryFilter'){
-                categorySelected = true;
-                resetButton.disabled = false;
-                event.target.classList.add('active');
-            }else if(event.target.classList[1] == 'active'){
-                event.target.classList.remove('active');
-            }
-            if(event.target.id === 'resetButton'){
-                categorySelected = false;
-                for (button of document.querySelectorAll('.categoryFilter')){
-                    button.classList.remove('active');
-                }
-                resetButton.disabled = true;
-            }
-        }
-    </script>
+    <div id="chart-container">
+        <h2>ROW ONE</h2>
+        <div class="chart-row" id="row-one">
+            <div class="chart-img-one">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-one">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+            <div class="chart-img-one">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-one">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+            <div class="chart-img-one">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-one">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+            <div class="chart-img-one">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-one">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+            <div class="chart-img-one">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-one">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+        </div>
+        <!-- row one end -->
+        <h2>ROW TWO</h2>
+        <div class="chart-row" id="row-two">
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-two">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+        </div>
+        <!-- row two end -->
+        <h2>ROW THREE</h2>
+        <div class="chart-row" id="row-three">
+            <div class="chart-img-three">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-three">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+            <div class="chart-img-three">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-three">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+            <div class="chart-img-three">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-three">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+            <div class="chart-img-three">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-three">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+            <div class="chart-img-three">
+                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            </div>
+            <div class="chart-img-three">
+                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            </div>
+        </div>
+    </div>
 </body>
 </html>
