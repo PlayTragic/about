@@ -12,6 +12,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     
     <style>
+    body{
+        height: 100%;
+        background: no-repeat url(https://www.newegg.com/insider/wp-content/uploads/windows_xp_bliss-wide.jpg);
+        background-size: cover;
+    }
     .album-image img{
         display: block;
         margin: 8px auto;
@@ -25,14 +30,21 @@
         display: flex;
     }
     .userbox-img img{
-        width: 13vw;
+        width: 20vw;
         min-width: 100px;
+        max-width: 200px;
     }
     .userbox-img{
         margin: 8px;
     }
+    .userbox p{
+        padding: 1em;
+    }
     .userbox-buttons{
         text-align: center;
+    }
+    .userbox-buttons button{
+        margin: 0.1vh;
     }
     .album-button{
         text-align: center;
@@ -53,20 +65,48 @@
         min-width: 150px;
         min-height: 150px;
     }
+    .chart-row{
+        margin: 0 10vw;
+    }
+    #row-one{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .chart-img-one{
+        flex: 0 0 18%;
+        margin: 0.1vw 0.2vw;
+    }
     .chart-img-one img{
-        width: 18vw;
-        height: 18vw;
-        padding: 0.5vw;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    #row-two{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .chart-img-two{
+        flex: 0 0 13%;
+        margin: 0.1vw 0.2vw;
     }
     .chart-img-two img{
-        width: 15vw;
-        height: 15vw;
-        padding: 0.25vw;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    #row-three{
+        display: flex;
+        flex-wrap: wrap;
+        
+    }
+    .chart-img-three{
+        flex: 0 0 9%;
+        margin: 0.1vw 0.2vw;
     }
     .chart-img-three img{
-        width: 9vw;
-        height: 9vw;
-        padding: 0.1vw;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
     .modal a.close-modal {
         display: none;
@@ -76,9 +116,13 @@
         padding: 0;
         background: none;
     }
+    .albumbox{
+        width: 300px;
+    }
     </style>
 </head>
 <body>
+    <div class="background"></div>
     <div id="header-container">
         <div class="window" id="header-box">
             <div class="title-bar">
@@ -94,9 +138,7 @@
                         <img src="https://64.media.tumblr.com/e3998fa7162bb6cb5aaf057546c03d68/af992c40b299732a-38/s1280x1920/9b221d6c65ada506b9a19284dadd59ffca428842.png" alt="avatar">
                     </div>
                     <p>
-                        hi, im the owner of this page further refered as (think of a nickname), a 20 something semi-music nerd.<br>
-                        this is my topster! <br>
-                        feel free to look around and click on any albums you're curious about. maybe filter through them if you're overwhelmed. 
+                        2022 topster. god bless my schedule cause i was planning to make this site since november
                     </p>
                 </div>
                 <div class="userbox-buttons">
@@ -108,9 +150,11 @@
             </div>
         </div>
     </div>
+    <!-- pop ups -->
     <div class="chart-popup">
+        <!-- fever dream -->
         <div id="feverdream" class="modal">
-            <div class="window" style="width: 300px;">
+            <div class="window albumbox">
                 <div class="title-bar">
                     <div class="title-bar-text">Details: FEVER DREAM</div>
                     <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
@@ -136,134 +180,256 @@
                     <p class="status-bar-field">Electronic</p>
                 </div>
             </div>
+        <!-- placeholder -->
+        <div id="placeholder" class="modal">
+            <div class="window albumbox">
+                <div class="title-bar">
+                    <div class="title-bar-text">Details: TEST</div>
+                    <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                </div>
+                <div class="album-image">
+                    <img src="https://64.media.tumblr.com/4c9cd08883c0589d2a58b270ac6b3b2a/4171a9e6b58d9ba4-6a/s400x600/d27379968876e9b84ab4ddaccd5a498a0ed79e68.jpg" alt="test img">
+                </div>
+                <div class="status-bar">
+                    <p class="status-bar-field">artist</p>
+                    <p class="status-bar-field">album</p>
+                    <p class="status-bar-field">1967 - 02 - 15</p>
+                </div>
+                <div class="window-body">
+                    <p>
+                        long winded description about the album.
+                        <br>
+                        200 characters max?
+                        <br>
+                        300? who knows.
+                    </p>
+                    <div class="album-button">
+                     <button onclick="window.open('https://fiend.bandcamp.com/album/fever-dream', '_blank')">link</button>
+                    </div>
+                </div>
+                <div class="status-bar">
+                    <p class="status-bar-field">category</p>
+                    <p class="status-bar-field">genre</p>
+                </div>
+            </div>
         </div>
     </div>
+    <!-- chart start -->
     <div id="chart-container">
         <h2>ROW ONE</h2>
         <div class="chart-row" id="row-one">
             <div class="chart-img-one">
-                <a href="#feverdream" rel="modal:open">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+                <a href="#placeholder" rel="modal:open">
+                <img src="https://upload.wikimedia.org/wikipedia/en/0/00/Fall_Out_Boy_-_From_Under_the_Cork_Tree_-_CD_album_cover.jpg" alt="fall out boy - from under the cork tree">
                 </a>
             </div>
             <div class="chart-img-one">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://upload.wikimedia.org/wikipedia/en/4/40/Earl_Sweatshirt_Doris.jpg" alt="earl sweatshirt - doris">
+            </a>
             </div>
             <div class="chart-img-one">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://www.joerperez.com/wp-content/uploads/2013/06/YEEZUS_COVER-1-scaled.jpg" alt="kanye west - yeezus">
+            </a>
             </div>
             <div class="chart-img-one">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://i1.sndcdn.com/artworks-000344073021-pcqfha-t500x500.jpg" alt="khundi panda - busanmul">
+            </a>
             </div>
             <div class="chart-img-one">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://f4.bcbits.com/img/a0618266191_65" alt="goreshit - semantic compositions on death and its meaning">
+            </a>
             </div>
             <div class="chart-img-one">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/PanicAtTheDisco-FeverCover.jpg" alt="panic! at the disco - a fever you cant sweat out ">
+            </a>
             </div>
             <div class="chart-img-one">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://media.pitchfork.com/photos/5929c458ea9e61561daa811a/1:1/w_600/0bc6101d.jpg" alt="madvillain - madvillainy">
+            </a>
             </div>
             <div class="chart-img-one">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://i.scdn.co/image/ab67616d0000b27345c853b6f83af97f5a22fac8" alt="childish gambino - because the internet">
+            </a>
             </div>
             <div class="chart-img-one">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://lastfm.freetls.fastly.net/i/u/ar0/d8c9a5c3c15e2d25df132cb47236a4fc.jpg" alt="joji - chloe burbank vol.1">
+            </a>
             </div>
             <div class="chart-img-one">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://f4.bcbits.com/img/a1638146004_10.jpg" alt="machine girl - wlfgrl">
+            </a>
             </div>
         </div>
         <!-- row one end -->
         <h2>ROW TWO</h2>
         <div class="chart-row" id="row-two">
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://upload.wikimedia.org/wikipedia/en/c/c7/Sophie_product.jpg" alt="sophie - product">
+            </a>
             </div>
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://upload.wikimedia.org/wikipedia/en/9/93/Brockhampton_-_Saturation_III.png" alt="brockhampton - saturation 3">
+            </a>
             </div>
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://upload.wikimedia.org/wikipedia/en/4/44/Kids_See_Ghosts_Cover.png" alt="kids see ghosts - kids see ghosts">
+            </a>
             </div>
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://upload.wikimedia.org/wikipedia/en/d/d3/Cover_of_Weezer%27s_White_Album%2C2016.jpg" alt="weezer - weezer (white)">
+            </a>
             </div>
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://upload.wikimedia.org/wikipedia/en/9/9b/Paramore_-_Brand_New_Eyes.png" alt="paramore - brand new eyes">
+            </a>
             </div>
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://upload.wikimedia.org/wikipedia/en/f/fd/Wolf_Cover2.jpg" alt="tyler, the creator - wolf">
+            </a>
             </div>
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            <a href="#feverdream" rel="modal:open">
+                <img src="https://f4.bcbits.com/img/a0930597781_10.jpg" alt="fiend - fever dream">
+            </a>
             </div>
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://media.pitchfork.com/photos/60dca808316238f6226d24c8/1:1/w_600/Magdalena-Bay.jpeg" alt="magdalena bay - mercurial world">
+            </a>
             </div>
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://i.scdn.co/image/ab67616d0000b273dc332c03c51dd1f87697571e" alt="berhana - han">
+            </a>
             </div>
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://media.pitchfork.com/photos/5e418e89159e01000820c1e8/1:1/w_600/Unlocked_Denzel%20Curry_Kenny%20Beats.jpg" alt="denzel curry & kenny beats - unlocked">
+            </a>
             </div>
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://i.scdn.co/image/ab67616d0000b273cd8430e6daeaf6df9a08ea99" alt="viann & son simba - a tale about the legend">
+            </a>
             </div>
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://i.scdn.co/image/ab67616d00001e0240905557158357e7491899f1" alt="xxx - kyomi">
+            </a>
             </div>
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://media.pitchfork.com/photos/5e84a2cee21e4f0009eaf016/1:1/w_600/Heaven%20to%20a%20Tortured%20Mind_Yves%20Tumor.jpg" alt="yves tumor - heaven to a tortured mind">
+            </a>
             </div>
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://i.discogs.com/kaq1m8IlaVocYnx3UQDIlnu_bkkk7YLdV2LmSLkFpyk/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExNDQ2/Njc0LTE1NDE5MDAz/MzMtOTE5Ni5qcGVn.jpeg" alt="the brobecks - goodnight, and have a pleasant tomorrow">
+            </a>
             </div>
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://image.bugsm.co.kr/album/images/500/201862/20186256.jpg" alt="jclef - flaw, flaw">
+            </a>
             </div>
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://images.genius.com/0ebe983a6fa6faa485acf195ab4e8d5c.520x520x1.jpg" alt="waax - wild & weak">
+            </a>
             </div>
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://is5-ssl.mzstatic.com/image/thumb/Music124/v4/29/5a/ab/295aab03-6952-e17a-fb65-94d4c82b8199/8809784695998.jpg/1200x1200bf-60.jpg" alt="qm - money breath">
+            </a>
             </div>
             <div class="chart-img-two">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://i.scdn.co/image/ab67616d0000b273e79e653cbab18f762ad6e9ea" alt="the rare occasions - into the shallows">
+            </a>
+            </div>
+            <div class="chart-img-two">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://upload.wikimedia.org/wikipedia/en/7/7e/JPEGMAFIA-Veteran_Cover.jpg" alt="jpegmafia - veteran">
+            </a>
+            </div>
+            <div class="chart-img-two">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://i.scdn.co/image/ab67616d0000b273bed885e83a0875c231fc12e2" alt="jerd - too many egos">
+            </a>
+            </div>
+            <div class="chart-img-two">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://i.scdn.co/image/ab67616d0000b2737aede4855f6d0d738012e2e5" alt="frank ocean - channel orange">
+            </a>
             </div>
         </div>
         <!-- row two end -->
         <h2>ROW THREE</h2>
         <div class="chart-row" id="row-three">
             <div class="chart-img-three">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://images.genius.com/f6cc3900926420ce1d9757c2b95076cf.1000x1000x1.jpg" alt="lee hyun jun - lost in translation">
+            </a>
             </div>
             <div class="chart-img-three">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://i.scdn.co/image/ab67616d0000b273897cd4eeff3174110aa6230b" alt="trent reznor & atticus ross - the social network">
+            </a>
             </div>
             <div class="chart-img-three">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://i.discogs.com/68gPZmJdCsScfWZ7RVxHsdqN0kYG5pGjy1zrkD0fqUQ/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQyMTQ2/NzQtMTQwOTY2MTQ1/My04NDQ3LmpwZWc.jpeg" alt="renard - because maybe">
+            </a>
             </div>
             <div class="chart-img-three">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://i1.sndcdn.com/artworks-000129054471-2hzgcm-t500x500.jpg" alt="big ghost ltd - griselda ghost">
+            </a>
             </div>
             <div class="chart-img-three">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://upload.wikimedia.org/wikipedia/en/b/ba/AtrocityExhibition.jpg" alt="danny brown - atrocity exhibition">
+            </a>
             </div>
             <div class="chart-img-three">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="http://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/082/669/163/82669163_1651555890310_1_600x600.JPG" alt="dsel - 2kzm.zip">
+            </a>
             </div>
             <div class="chart-img-three">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://image.bugsm.co.kr/album/images/500/204810/20481018.jpg" alt="cwar - howmuch1">
+            </a>
             </div>
             <div class="chart-img-three">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://f4.bcbits.com/img/a2666809861_10.jpg" alt="backxwash - i lie here buried with my rings and my dresses">
+            </a>
             </div>
             <div class="chart-img-three">
-                <img src="https://64.media.tumblr.com/0131bfd21fdf755e54a467c1f550da7a/c520f61166e30e75-89/s500x750/171fa0ed4defd4ca0f4f167269678bbd6f8f736a.jpg" alt="img1">
-            </div>
+                <a href="#placeholder" rel="modal:open">
+                    <img src="https://media.pitchfork.com/photos/60340f810329c375908a7a2e/1:1/w_600/Black%20Dresses:%20Forever%20in%20Your%20Heart.jpg" alt="black dresses - forever in your heart">
+                </a>
+                </div>
             <div class="chart-img-three">
-                <img src="https://64.media.tumblr.com/2edc5ccf5e91cc73fa48ffb9b65d1d83/c520f61166e30e75-80/s400x600/a46eec5b96d1229fc2d23495a075d2c0d0d3bee8.jpg" alt="img2">
+            <a href="#placeholder" rel="modal:open">
+                <img src="https://i1.sndcdn.com/artworks-LqcidiVoyAxmlC7e-uuAc8A-t500x500.jpg" alt="RO - virtual world maniac">
+            </a>
             </div>
         </div>
     </div>
