@@ -14,9 +14,30 @@
         @import "https://unpkg.com/xp.css";
     body{
         height: 100%;
-        background: no-repeat url(https://www.newegg.com/insider/wp-content/uploads/windows_xp_bliss-wide.jpg);
+/*         background: no-repeat url(https://www.newegg.com/insider/wp-content/uploads/windows_xp_bliss-wide.jpg);
+        background-size: cover; */
+        background: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);
         background-size: cover;
         overflow-y: auto !important; 
+    }
+    .bg-wave{
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background: linear-gradient( #76b852, #8dc26f);
+        border-radius: 33% 95% 0% 0% / 54% 72% 0% 0%;
+        transform: scale(1.3);
+    }
+    .bg{
+        height: 25%;
+        width: 100vw;
+        padding: 0;
+        margin: 0;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: -50;
     }
     h2{
         font-family: "Franklin Gothic Medium";
@@ -87,8 +108,8 @@
         justify-content: center;
     }
     .chart-row img{
-        min-width: 150px;
-        min-height: 150px;
+        min-width: 50px;
+        min-height: 50px;
     }
     .chart-row{
         margin: 0 0.2vw;
@@ -152,14 +173,14 @@
         
         function filterGenre(genre){
             if(activeFilter != genre){
-            $("div.item").filter("."+genre).show();
-            $("div.item").filter(":not(."+genre+")").hide();
+            $("div.item").filter("."+genre).show(500);
+            $("div.item").filter(":not(."+genre+")").hide(500);
             activeFilter = genre;
             }
         }
         
         $("#resetButton").click(function(){
-            $("div.item").show();
+            $("div.item").show(500);
             activeFilter = "all";
             $('#resetButton').prop('disabled', true);
         });
@@ -171,22 +192,6 @@
         })
         });
 
-/*         customElements.define('win-95',
-        class extends HTMLElement {
-            constructor() {
-                super();
-                var div = document.createElement('div');
-                div.innerHTML = "<p> Custom Element </p>";
-                var style = document.createElement('style');
-                style.textContent = `@import "https://unpkg.com/98.css"`;
-                style.textContent = `h1{
-                    color: red;
-                }`;
-                const shadowRoot = this.attachShadow({mode: 'open'});
-                shadowRoot.appendChild(style);
-            }
-        }); */
-
         customElements.define('win-95',
         class extends HTMLElement {
             constructor() {
@@ -196,7 +201,8 @@
             var div = document.createElement('div');
 
             // fill div with html 
-            div.innerHTML = `            <div class="window albumbox" id="95">
+            div.innerHTML = `
+            <div class="window albumbox" id="95">
                 <div class="title-bar">
                     <div class="title-bar-text">Details: TEST95</div>
                     <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
@@ -262,6 +268,10 @@
     </script>
 </head>
 <body>
+    <div class="bg">
+        <div class="bg-wave">
+        </div>
+    </div>
     <div id="header-container">
         <div class="window" id="header-box">
             <div class="title-bar">
@@ -320,6 +330,8 @@
                 </div>
             </div>
         </div>
+        <win-95 id="win95" class="modal">
+        </win-95>
         <!-- placeholder -->
         <div id="placeholder" class="modal">
             <div class="window albumbox">
@@ -352,8 +364,6 @@
                     <p class="status-bar-field">genre</p>
                 </div>
             </div>
-
-            <win-95 id="win95" class="modal"></win-95>
 
         </div>
     </div>
