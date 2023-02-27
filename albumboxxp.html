@@ -179,10 +179,33 @@
     }
     ul.tree-view{
         margin: 1rem  5rem;
+        background: inherit;
+        border: none;
+    }
+    .tree-view summary::before{
+        color: #222;
+    }
+    .tree-view summary::marker{
+        color: #222;
+    }
+    .tree-view summary{
+        color: white;
+    }
+    .tree-view li{
+        color: white;
+    }
+    ul.tree-view ul{
+        border-left: 1px dotted white;
     }
     img[data-selected="Y"]{
         scale: 1.1;
-        box-shadow: 0px 0px 15px 1px #e2f3e4;
+        box-shadow: 0 0 1rem 0.2em #e2f3e4;
+    }
+    ul.tree-view ul>li:before{
+        border-bottom: 1px dotted white;
+    }
+    ul.tree-view ul>li:last-child:after{
+        background: #6487DC;
     }
     </style>
     <script>
@@ -486,6 +509,36 @@
         </div>
             <h2>Persistent Picks</h2>
             <p>Albums that have proven replay value, and I've been listening to consistently for years.</p>
+            <ul class="tree-view">
+                <li>
+                    <details>
+                        <summary>List</summary>
+                        <ul>
+                            <li>sophie - product</li>
+                            <li>brockhampton - saturation 3</li>
+                            <li>kids see ghosts - kids see ghosts</li>
+                            <li>weezer - weezer (white)</li>
+                            <li>paramore - brand new eyes</li>
+                            <li>tyler, the creator - wolf</li>
+                            <li>fiend - fever dream</li>
+                            <li>magdalena bay - mercurial world</li>
+                            <li>berhana - han</li>
+                            <li>denzel curry & kenny beats - unlocked</li>
+                            <li>viann & son simba - a tale about the legend</li>
+                            <li>xxx - kyomi</li>
+                            <li>yves tumor - heaven to a tortured mind</li>
+                            <li>the brobecks - goodnight, and have a pleasant tomorrow</li>
+                            <li>jclef - flaw, flaw</li>
+                            <li>waax - wild & weak</li>
+                            <li>qm - money breath</li>
+                            <li>the rare occasions - into the shallows</li>
+                            <li>jpegmafia - veteran</li>
+                            <li>jerd - too many egos</li>
+                            <li>frank ocean - channel orange</li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
     </div>
     <div class="chart-row" id="row-two">
         <div class="chart-img-two item">
@@ -605,6 +658,25 @@
         </div>
             <h2>2022's (re)discoveries</h2>
             <p>Albums that I've fondly listened to in 2022. Not necessarily released in 2022.</p>
+            <ul class="tree-view">
+                <li>
+                    <details>
+                        <summary>List</summary>
+                        <ul>
+                            <li>lee hyun jun - lost in translation</li>
+                            <li>trent reznor & atticus ross - the social network</li>
+                            <li>renard - because maybe</li>
+                            <li>big ghost ltd - griselda ghost</li>
+                            <li>danny brown - atrocity exhibition</li>
+                            <li>dsel - 2kzm.zip</li>
+                            <li>cwar - howmuch1</li>
+                            <li>backxwash - i lie here buried with my rings and my dresses</li>
+                            <li>black dresses - forever in your heart</li>
+                            <li>RO - virtual world maniac</li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
     </div>
     <div class="chart-row" id="row-three">
         <div class="chart-img-three item">
