@@ -63,8 +63,9 @@
         width: 250px;
         height: 250px;
     }
-    .status-bar-field{
+    .status-bar{
         text-align: center;
+        align-items: center;
     }
     .userbox{
         display: flex;
@@ -118,7 +119,7 @@
         flex-wrap: wrap;
         justify-content: center;
         margin: auto;
-        width: 95vw;
+        max-width: 100rem;
     }
     .chart-row img{
         min-width: 100px;
@@ -174,13 +175,13 @@
         height: 100;
         display: flex;
     }
-    .tree-view{
-        text-align: initial;
-    }
     ul.tree-view{
-        margin: 1rem  5rem;
+        text-align: initial;
+        max-width: 20rem;
         background: inherit;
         border: none;
+        display: block;
+        margin: auto;
     }
     .tree-view summary::before{
         color: #222;
@@ -215,20 +216,21 @@
         
         function filterGenre(genre){
             if(activeFilter != genre){
-            $("div.item").filter("."+genre).show(500);
-            $("div.item").filter(":not(."+genre+")").hide(500);
+            $("div.item").filter("."+genre).fadeIn(300);
+            $("div.item").filter(":not(."+genre+")").fadeOut(300);
             activeFilter = genre;
             }
         }
         
         $("#resetButton").click(function(){
-            $("div.item").show(500);
+            $("div.item").fadeIn(300);
             activeFilter = "all";
             $('#resetButton').prop('disabled', true);
         });
-        $("#category1").click(function(){ filterGenre("genre-1"); });
-        $("#category2").click(function(){ filterGenre("genre-3"); });
-        $("#category3").click(function(){ filterGenre("genre-2"); });
+        $("#hiphop").click(function(){ filterGenre("genre-hiphop"); });
+        $("#electronic").click(function(){ filterGenre("genre-electronic"); });
+        $("#rock").click(function(){ filterGenre("genre-rock"); });
+        $("#misc").click(function(){ filterGenre("genre-misc"); });
         $(".categoryFilter").click(function(){
             $('#resetButton').prop('disabled', false);
         })
@@ -251,32 +253,30 @@
             div.innerHTML = `
             <div class="window albumbox" id="95">
                 <div class="title-bar">
-                    <div class="title-bar-text">Details: TEST95</div>
-                    <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close" id="95close" onclick="$.modal.close();"></button></a></div>
+                    <div class="title-bar-text">Details: Lost In Translation</div>
+                    <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close" onclick="$.modal.close();"></button></a></div>
                 </div>
                 <div class="album-image">
-                    <img src="https://64.media.tumblr.com/4c9cd08883c0589d2a58b270ac6b3b2a/4171a9e6b58d9ba4-6a/s400x600/d27379968876e9b84ab4ddaccd5a498a0ed79e68.jpg" alt="test img">
+                    <img src="https://images.genius.com/f6cc3900926420ce1d9757c2b95076cf.1000x1000x1.jpg" alt="lee hyun jun - lost in translation">
                 </div>
                 <div class="status-bar">
-                    <p class="status-bar-field">artist</p>
-                    <p class="status-bar-field">album</p>
-                    <p class="status-bar-field">1967 - 02 - 15</p>
+                    <p class="status-bar-field">이현준<br>[LeeHyunJun]</p>
+                    <p class="status-bar-field">번역 중 손실 <br>[LOST IN TRANSLATION]</p>
+                    <p class="status-bar-field"><span class=centertext>2022 - 10 - 15</span></p>
                 </div>
                 <div class="window-body">
                     <p>
-                        long winded description about the album.
-                        <br>
-                        200 characters max?
-                        <br>
-                        300? who knows.
+                        i knew from the moment the listening party was over that this was going to be my AOTY. the experimental, glitchy and unfriendly production was something i seeked out after coming across SOPHIE, and im glad that more korean rappers are starting to approach the deconstructed - industrial soundscape. 
+
                     </p>
                     <div class="album-button">
-                     <button onclick="window.open('https://fiend.bandcamp.com/album/fever-dream', '_blank')">link</button>
+                     <button onclick="window.open('https://open.spotify.com/album/38XlmciAay0Q2PsEekqJue?si=d59f1fbbc69c4102', '_blank')">spotify</button>
                     </div>
                 </div>
                 <div class="status-bar">
-                    <p class="status-bar-field">category</p>
-                    <p class="status-bar-field">genre</p>
+                    <p class="status-bar-field">(re)discoveries</p>
+                    <p class="status-bar-field">Hip-Hop, Electronic</p>
+                </div>
                 </div>`;
 
             // create style html element
@@ -284,6 +284,9 @@
 
             // add style data
             style.textContent = `@import "https://unpkg.com/98.css";
+            .title-bar, .window, button, input, label, option, select, table, textarea, ul.tree-view{
+                font-size: 9pt;
+            }
             .album-image img{
         display: block;
         margin: 8px auto;
@@ -299,6 +302,11 @@
     .title-bar{
         background: navy;
     }
+    .status-bar {
+  text-align: center;
+
+}
+
             `;
 
             // create shadowRoot from this element
@@ -322,7 +330,7 @@
     <div id="header-container">
         <div class="window" id="header-box">
             <div class="title-bar">
-                <div class="title-bar-text">PART-TIME MUSIC ENJOYER, BORN HATER</div>
+                <div class="title-bar-text">FULL TIME PROGRAMMER, PART-TIME MUSIC ENJOYER, BORN HATER</div>
                 <div class="title-bar-controls"><button aria-label="Minimize"></button>
                 <div class="title-bar-controls"><button aria-label="Close"></button>
                 </div>
@@ -338,9 +346,10 @@
                     </p>
                 </div>
                 <div class="userbox-buttons">
-                    <button class="categoryFilter" id="category1">CATEGORY 1</button>
-                    <button class="categoryFilter" id="category2">CATEGORY 2</button>
-                    <button class="categoryFilter" id="category3">CATEGORY 3</button>
+                    <button class="categoryFilter" id="hiphop">HIP-HOP</button>
+                    <button class="categoryFilter" id="electronic">ELECTRONIC</button>
+                    <button class="categoryFilter" id="rock">ROCK</button>
+                    <button class="categoryFilter" id="misc">MISC</button>
                     <button disabled id="resetButton">RESET</button>
                 </div>
             </div>
@@ -348,7 +357,7 @@
     </div>
     <!-- pop ups -->
     <div class="chart-popup">
-        <!-- fever dream -->
+        <!-- start fever dream -->
         <div id="feverdream" class="modal">
             <div class="window albumbox">
                 <div class="title-bar">
@@ -372,48 +381,1215 @@
                     </div>
                 </div>
                 <div class="status-bar">
-                    <p class="status-bar-field">persistent picks</p>
+                    <p class="status-bar-field">Persistent Picks</p>
                     <p class="status-bar-field">Electronic</p>
                 </div>
             </div>
         </div>
+            <!-- end -->
+            <!-- lit -->
         <win-95 id="win95" class="modal">
         </win-95>
-        <!-- placeholder -->
-        <div id="placeholder" class="modal">
-            <div class="window albumbox">
-                <div class="title-bar">
-                    <div class="title-bar-text">Details: TEST</div>
-                    <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
-                </div>
-                <div class="album-image">
-                    <img src="https://64.media.tumblr.com/4c9cd08883c0589d2a58b270ac6b3b2a/4171a9e6b58d9ba4-6a/s400x600/d27379968876e9b84ab4ddaccd5a498a0ed79e68.jpg" alt="test img">
-                </div>
-                <div class="status-bar">
-                    <p class="status-bar-field">artist</p>
-                    <p class="status-bar-field">album</p>
-                    <p class="status-bar-field">1967 - 02 - 15</p>
-                </div>
-                <div class="window-body">
-                    <p>
-                        long winded description about the album.
-                        <br>
-                        200 characters max?
-                        <br>
-                        300? who knows.
-                    </p>
-                    <div class="album-button">
-                     <button onclick="window.open('https://fiend.bandcamp.com/album/fever-dream', '_blank')">link</button>
+            <!-- end -->
+                <!-- placeholder -->
+                <div id="placeholder" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: TEST</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://64.media.tumblr.com/4c9cd08883c0589d2a58b270ac6b3b2a/4171a9e6b58d9ba4-6a/s400x600/d27379968876e9b84ab4ddaccd5a498a0ed79e68.jpg" alt="test img">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">artist</p>
+                            <p class="status-bar-field">album</p>
+                            <p class="status-bar-field">1967 - 02 - 15</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                long winded description about the album.
+                                <br>
+                                200 characters max?
+                                <br>
+                                300? who knows.
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://fiend.bandcamp.com/album/fever-dream', '_blank')">link</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">category</p>
+                            <p class="status-bar-field">genre</p>
+                        </div>
                     </div>
                 </div>
-                <div class="status-bar">
-                    <p class="status-bar-field">category</p>
-                    <p class="status-bar-field">genre</p>
+                <!-- end -->
+                <!-- because maybe -->
+                <div id="maybe" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: BECAUSE MAYBE!</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://i.discogs.com/68gPZmJdCsScfWZ7RVxHsdqN0kYG5pGjy1zrkD0fqUQ/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQyMTQ2/NzQtMTQwOTY2MTQ1/My04NDQ3LmpwZWc.jpeg" alt="renard - because maybe">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Renard</p>
+                            <p class="status-bar-field">Because Maybe!</p>
+                            <p class="status-bar-field">2010 - 08 - 21</p>
+                        </div>
+                         <div class="window-body">
+                            <p>
+                                less of an album, more of a greatest hits compilation. still. renard, right beside goreshit was one of the artists that ive picked up from my rhythm game days that shaped my taste in fast paced, drum overloaded music. and coming across this comp was such a joy.
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://archive.org/details/renard-best-of-lapfox-vol-1-because-maybe', '_blank')">archive.org</button>
+                             <button onclick="window.open('https://heckscaper.com/backcat/catb.html', '_blank')">heckscaper archive (scroll down)</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">category</p>
+                            <p class="status-bar-field">genre</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <!-- end -->
+                <!-- burbank -->
+                <div id="burbank" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: Chloe Burbank Vol. 1</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://lastfm.freetls.fastly.net/i/u/ar0/d8c9a5c3c15e2d25df132cb47236a4fc.jpg" alt="joji - chloe burbank vol.1">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">joji</p>
+                            <p class="status-bar-field">Chloe Burbank Vol. 1</p>
+                            <p class="status-bar-field">unreleased</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                babygirl return to your roots as a shitty soundcloud musician please… 
+                                <br>
+                                as much as i enjoy some of his more recent works, i don’t think joji can ever replicate the emotions and rawness cbbv1 delivered. unsaved info saved my life fr fr fr
+                                <br>
+                                only thom and you suck charlie are officially considered cbbv1 songs but i consider it most of his old sc songs (it's unreleased anyways bro)
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://archive.org/details/chole-burbank-vol-1', '_blank')">archive.org</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Basis Of Taste</p>
+                            <p class="status-bar-field">Misc (Lo-fi)</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- han -->
+                <div id="han" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: HAN</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://i.scdn.co/image/ab67616d0000b273dc332c03c51dd1f87697571e" alt="berhana - han">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Berhana</p>
+                            <p class="status-bar-field">HAN</p>
+                            <p class="status-bar-field">2019 - 10 - 18</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                berhana is just so smoooooth on this record. the production is so clean and everything i want from an rnb record. g2g's guitar riffs just gets your attention and then the bass solo is absolutely everything. 
+                                <br>
+                                the interludes resembling flight announcements complete the aesthetic of this album so well.
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/5lNkWEQ3JI2nrJL07xjbTh?si=cXZhZfgqRqaBqQacy30yWw', '_blank')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Misc (RnB)</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- busanmul -->
+                <div id="busanmul" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: BYPRODUCT</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://i1.sndcdn.com/artworks-000344073021-pcqfha-t500x500.jpg" alt="khundi panda - busanmul">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Khundi Panda</p>
+                            <p class="status-bar-field">부산물<br>[Byproduct / Busanmul]</p>
+                            <p class="status-bar-field">2018 - 05 - 04</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                this mixtape brings me back to the worst time of my life lol. i cherish it dearly.
+                                <br>
+                                though i’ve tried reviewing this multiple times, i fail to articulate the waterfall of emotions that this brought me and still brings me without avail.
+                                <br>
+                                Thank you for teaching me empathy. 
+                                
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://soundcloud.com/hatefullmind/sets/byproduct', '_blank')">soundcloud</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Basis of Taste</p>
+                            <p class="status-bar-field">Hip-Hop</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- semantic -->
+                <div id="semantic" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: semantic compositions...</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://f4.bcbits.com/img/a0618266191_65" alt="goreshit - semantic compositions on death and its meaning">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">goreshit</p>
+                            <p class="status-bar-field">semantic compositions on death<br>and its meaning</p>
+                            <p class="status-bar-field">2011 - 06 - 15</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                as much as i hate melancholic breakcore, this is the quintessential breakcore album. i had a long stint with playing a rhythm game in my formative years, and this was the most lasting thing it left me with. other than wrist strain.            
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/6o3tgZIP3K1FpAGTwHVvEd?si=Hp7RIsQtR12byTcEeeuNig')">spotify</button>
+                             <button onclick="window.open('https://goreshit.bandcamp.com/album/semantic-compositions-on-death-and-its-meaning')">bandcamp</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Basis of Taste</p>
+                            <p class="status-bar-field">Electronic</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- product -->
+                <div id="product" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: PRODUCT</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/c/c7/Sophie_product.jpg" alt="sophie - product">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">SOPHIE</p>
+                            <p class="status-bar-field">PRODUCT</p>
+                            <p class="status-bar-field">2015 - 11 - 27</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                one of the most influential electronic sounding albums honestly. the textures and design of the sound made me pay more close attention to the construction and building blocks of songs more. 
+                                <br>
+                                it's just so FUN to listen to. it's insane that sophie melded and morphed all the bubble popping, metal clanging, leather stretching sounds from scratch instead of using samples. she just captures those sparks of day-to-day life so immaculately.
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/playlist/3Q4cPwMHY95ZHXtmcU2xvH?si=81ae91ea39844af2')">spotify</button>
+                             <button onclick="window.open('https://nmbrs.bandcamp.com/album/product')">bandcamp</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Electronic</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- corktree -->
+                <div id="corktree" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: From Under The Cork Tree</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/0/00/Fall_Out_Boy_-_From_Under_the_Cork_Tree_-_CD_album_cover.jpg" alt="fall out boy - from under the cork tree">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Fall Out Boy</p>
+                            <p class="status-bar-field">From Under The Cork Tree</p>
+                            <p class="status-bar-field">2005 - 05 - 03</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                this was more than i bargained for. though not the first artist i ever liked, getting into fall out boy, analyzing the music, the lyrics, creating stuff about this band fundamentally changed how i intake music and how i approach the act of ‘liking’ a musician.
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/2AX9B6Af32in4KbKtX1r4q?si=5PBWLZyaRjSpGlPQ5vWWnQ')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Basis of Taste</p>
+                            <p class="status-bar-field">Rock</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- doris -->
+                <div id="doris" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: Doris</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/4/40/Earl_Sweatshirt_Doris.jpg" alt="earl sweatshirt - doris">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Earl Sweatshirt</p>
+                            <p class="status-bar-field">Doris</p>
+                            <p class="status-bar-field">2013 - 08 - 20</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                my first delve into hip-hop alongside BTI. the emotions that Earl put on this record made me drawn to this album. The production, Earl’s lyricism, the craftsmanship of his rhyme schemes played a huge part in shaping my taste in rap, and got me more acquainted with more ‘underground’ sounding hip-hop. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/5vRfIDOPJHy3W2wHWbzLlE?si=c81153bfe70f43ee')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Basis of Taste</p>
+                            <p class="status-bar-field">Hip-Hop</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- yeezus -->
+                <div id="yeezus" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: Yeezus</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://www.joerperez.com/wp-content/uploads/2013/06/YEEZUS_COVER-1-scaled.jpg" alt="kanye west - yeezus">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Kanye West</p>
+                            <p class="status-bar-field">Yeezus</p>
+                            <p class="status-bar-field">2013 - 06 - 18</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                my taste in hip-hop was consistently moody and low energy, though i enjoyed more dynamic electronic music, it never really transferred over to my taste in hip-hop before listening to Yeezus. the experimental-electronic beats and the shock it gave me had such a huge influence in my taste leaning hard towards electronic hip-hop.
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/7D2NdGvBHIavgLhmcwhluK?si=ead61837aff64a81')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Basis of Taste</p>
+                            <p class="status-bar-field">Hip-Hop, Electronic</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- fever -->
+                <div id="fever" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: A Fever You Can't Sweat Out</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/PanicAtTheDisco-FeverCover.jpg" alt="panic! at the disco - a fever you cant sweat out ">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Panic! at the Disco</p>
+                            <p class="status-bar-field">A Fever You Can't Sweat Out</p>
+                            <p class="status-bar-field">2005 - 09 - 27</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                One of the first albums I remember listening to in full. Though i’ve enjoyed music from a young age, getting into p!atd was def my first step from a casual music listener to the music nerd i am today. Ryan Ross’s lyricism is unmatched. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/01hp4DvayKlnqUQrmk0vvz?si=a054e0d6df47494f')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Basis of Taste</p>
+                            <p class="status-bar-field">Rock</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- madvillainy -->
+                <div id="madvillainy" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: Madvillainy</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://media.pitchfork.com/photos/5929c458ea9e61561daa811a/1:1/w_600/0bc6101d.jpg" alt="madvillain - madvillainy">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Madvillain</p>
+                            <p class="status-bar-field">Madvillainy</p>
+                            <p class="status-bar-field">2004 - 03 - 23</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                one of my first hip-hop albums. as someone who had little to no understanding of rap it was a hard album to wrap my head around. but after going through a few more hip-hop albums and trying to understand the structure behind rap, this album flipped a switch in my brain. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/19bQiwEKhXUBJWY6oV3KZk?si=9801a2fdea054d28')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Basis of Taste</p>
+                            <p class="status-bar-field">Hip-Hop</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- bti -->
+                <div id="bti" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: Because The Internet</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://i.scdn.co/image/ab67616d0000b27345c853b6f83af97f5a22fac8" alt="childish gambino - because the internet">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Childish Gambino</p>
+                            <p class="status-bar-field">Because The Internet</p>
+                            <p class="status-bar-field">2013 - 12 - 10</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                the fact that this was my first hip-hop album listened to in full explains a lot about my taste. ambitious, all over the place, and at odds. it was exciting, getting to hear such a sonically diverse album. without it, i definitely would’ve thought that hip-hop was a boring one-note genre.
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/62yjWIhnATHxPqGbgC9Lqr?si=f2e514c43b954ed2')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Basis of Taste</p>
+                            <p class="status-bar-field">Hip-Hop</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- wlfgrl -->
+                <div id="wlf" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: WLFGRL</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://f4.bcbits.com/img/a1638146004_10.jpg" alt="machine girl - wlfgrl">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Machine Girl</p>
+                            <p class="status-bar-field">WLFGRL</p>
+                            <p class="status-bar-field">2014 - 02 - 16</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                rekindled my love for breakcore once more. i love love love the diversity of sound in this album and machine girl’s discography in general. as someone who mostly enjoyed moody and ambient breakcore production, the harsher and louder sound of this album was a stepping stone into industrial hip-hop production for me.
 
-        </div>
-    </div>
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/1xbcqJ0EAMxyGyffMzO8rL?si=314e7e14090f4df8')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Basis of Taste</p>
+                            <p class="status-bar-field">Electronic</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- sat3 -->
+                <div id="iii" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: SATURATION III</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/9/93/Brockhampton_-_Saturation_III.png" alt="brockhampton - saturation 3">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">BROCKHAMPTON</p>
+                            <p class="status-bar-field">SATURATION III</p>
+                            <p class="status-bar-field">2017 - 12 - 15</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                brockhampton has always been such a diverse group in sound, but saturation 3 felt like it bridged the gap from bh’s more carefree DIY attitude to their matured sound onwards so smoothly. you can really feel each member’s touch and the bond between them on this album.
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/5c2AzoNyr46fCQM5d8mxE0?si=288f54f9da494323')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Hip-Hop</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- ksg -->
+                <div id="ksg" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: Kids See Ghosts</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/4/44/Kids_See_Ghosts_Cover.png" alt="kids see ghosts - kids see ghosts">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Kids See Ghosts</p>
+                            <p class="status-bar-field">Kids See Ghosts</p>
+                            <p class="status-bar-field">2018 - 06 - 08</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                the first time i listened to reborn was probably an out of body experience. enough so that i had to put the title of it on my body. it’s bittersweet. i remember several hours i spent during the summer, half laying down in my dark room just spacing out as i listen and relate to the duo’s desire to keep moving forward.
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/6pwuKxMUkNg673KETsXPUV?si=d839b46b2e704220')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Hip-Hop</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- white -->
+                <div id="white" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: Weezer (White)</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/d/d3/Cover_of_Weezer%27s_White_Album%2C2016.jpg" alt="weezer - weezer (white)">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Weezer</p>
+                            <p class="status-bar-field">Weezer (White)</p>
+                            <p class="status-bar-field">2016 - 04 - 01</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                everyone hates weezer. especially if you’re a fan. i don’t know how to feel about this band. but what i do know is that this is THE summer album. though i am sick of Cuomo’s pathetic nerd hopeless romantic lyricism nowadays, considering that I was in high school when i first came across this, i get my obsession with it at the time. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/6StNTJJ7Yq3Hf121kLvPBz?si=b6d093861fb64220')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Rock</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- bne -->
+                <div id="bne" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: Brand New Eyes</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/9/9b/Paramore_-_Brand_New_Eyes.png" alt="paramore - brand new eyes">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Paramore</p>
+                            <p class="status-bar-field">Brand New Eyes</p>
+                            <p class="status-bar-field">2009 - 09 - 29</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                though i never liked paramore with the same intensity as p!atd or fob, i have always had a deep appreciation for the music they put out. i tend to lambast those previous two bands for selling out (deservedly) but never did paramore’s maturation and shifts in their sound feel jarring. especially bne, which was an excellent transitional album from riot and awkif’s grungy emo angst to their self titled’s matured adult with whimsy attitude. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/27UqZoE1kV6sIV6uQcI28A?si=8eb71c982f9c4b17')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Rock</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- wolf -->
+                <div id="wolf" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: WOLF</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/f/fd/Wolf_Cover2.jpg" alt="tyler, the creator - wolf">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Tyler, The Creator</p>
+                            <p class="status-bar-field">WOLF</p>
+                            <p class="status-bar-field">2013 - 04 - 02</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                i still remember the first time i was blown away by earl’s verse in rusty. the chain effect of that leading me to checking out earl’s discography, then giving this album a full spin, then odd future, and the rest is history. something about this era of tyler was just the perfect blend of spilled guts and absurdness i can’t get enough of. imagine having 48 and tamale on the same album. his range. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/40QTqOBBxCEIQlLNdSjFQB?si=d7dc91ae0c0e49bf')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Hip-Hop</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- mercurial world -->
+                <div id="mercurial" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: Mercurial World</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://media.pitchfork.com/photos/60dca808316238f6226d24c8/1:1/w_600/Magdalena-Bay.jpeg" alt="magdalena bay - mercurial world">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Magdalena Bay</p>
+                            <p class="status-bar-field">Mercurial World</p>
+                            <p class="status-bar-field">2021 - 10 - 08</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                i tend to avoid most pop records, other than stripped down bedroom/indie pop or overprocessed and messy hyperpop. but this album was such a smooth listening experience. the circular nature of the album, the digital nostalgia mixed with a sound that evokes familiarity, like songs that you’ve heard on the radio. all wrapped with a shiny holographic pink foil. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/1ERrUvG31thFCxdwWUoJrY?si=2eb99e8d560c4dee')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Misc (Synth Pop)</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- unlocked -->
+                <div id="unlocked" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: UNLOCKED</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://media.pitchfork.com/photos/5e418e89159e01000820c1e8/1:1/w_600/Unlocked_Denzel%20Curry_Kenny%20Beats.jpg" alt="denzel curry & kenny beats - unlocked">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Kenny Beats & Denzel Curry</p>
+                            <p class="status-bar-field">UNLOCKED</p>
+                            <p class="status-bar-field">2020 - 02 - 07</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                short and sweet. the utilization of samples from what i assume are old cartoons or movies, reminded me of madlib (but much easier to listen to in my opinion lol..). the record was grimy yet polished. i loved denzel’s energy in this project. venomous yet sounds like he’s just playing.
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/5LsyqeWryTmxsmda4xkm5a?si=eaef104298d24cfb')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Hip-Hop</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- legend -->
+                <div id="legend" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: A Tale About The...</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://i.scdn.co/image/ab67616d0000b273cd8430e6daeaf6df9a08ea99" alt="viann & son simba - a tale about the legend">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Viann <br>& Son Simba</p>
+                            <p class="status-bar-field">전설<br>[A Tale About The Legend]</p>
+                            <p class="status-bar-field">2021 - 06 - 27</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                THE FUCKING ALBUM OF ALL TIME!!!!! im forever indebted to this project for what it brought to me. the production is distinctly korean in a way that’s modern yet traditional. the occultic and dark vibes alongside the conscious choice of writing lyrics that evoke old texts, the whole aesthetic and soundscape of this album is masterful in it’s worldbuilding. what an amazing concept album. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/2ap6GQ44IrXmJ7lg9IAgN6?si=df033e91d784400d')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Hip-Hop, Electronic</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- kyomi -->
+                <div id="kyomi" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: Kyomi</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://i.scdn.co/image/ab67616d00001e0240905557158357e7491899f1" alt="xxx - kyomi">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">XXX</p>
+                            <p class="status-bar-field">교미<br>[Kyomi]</p>
+                            <p class="status-bar-field">2016 - 07 - 09</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                this was such a well polished yet raw project. it felt grotesque at times with frnk’s utilization of kim ximya’s vocals. chopping, reversing, and repeating the rapper’s words to cobble together an animalistic expression from both artists.
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/68To0i66fYxVRRqf7fAh4i?si=c958395ad53d4bc8')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Hip-Hop, Electronic</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- htatm -->
+                <div id="htatm" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: Heaven To A Tortured Mind</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://media.pitchfork.com/photos/5e84a2cee21e4f0009eaf016/1:1/w_600/Heaven%20to%20a%20Tortured%20Mind_Yves%20Tumor.jpg" alt="yves tumor - heaven to a tortured mind">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Yves Tumor</p>
+                            <p class="status-bar-field">Heaven To A Tortured Mind</p>
+                            <p class="status-bar-field">2020 - 04 - 03</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                i don’t know how yves tumor managed to construct an album so polished yet biting. like a siren song. luring you in with the smoothness of gospel for a new century, then slowly strengthening its grip around you, dragging you deeper and deeper into this album. explosive and subdued, grandiose yet vulnerable.  it's almost like a religious experience honestly.
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/00R4y0gymycDUv9IVY7VvO?si=02fcd392be4a46e1')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Rock</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- gnahpt -->
+                <div id="gn" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: GNAHPT</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://i.discogs.com/kaq1m8IlaVocYnx3UQDIlnu_bkkk7YLdV2LmSLkFpyk/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExNDQ2/Njc0LTE1NDE5MDAz/MzMtOTE5Ni5qcGVn.jpeg" alt="the brobecks - goodnight, and have a pleasant tomorrow">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">The Brobecks</p>
+                            <p class="status-bar-field">Goodnight, And Have A Pleasant Tomorrow</p>
+                            <p class="status-bar-field">2006 - 04 - 30</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                back when i first found out about the brobecks, their discography was barely archived nor documented and it felt like uncovering lost records trying to find the full version of gnahpt. though dallon weeke’s doesn’t have much fondness for this record, i love the small scale tight knit feel of this album.
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://thebrobecks.bandcamp.com/album/goodnight-and-have-a-pleasant-tomorrow')">bandcamp (incomplete)</button>
+                             <button onclick="window.open('https://youtu.be/zBG_Nhq_ijU')">youtube</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Rock</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- flaw -->
+                <div id="flaw" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: flaw, flaw</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://image.bugsm.co.kr/album/images/500/201862/20186256.jpg" alt="jclef - flaw, flaw">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">jclef</p>
+                            <p class="status-bar-field">flaw, flaw</p>
+                            <p class="status-bar-field">2018 - 08 - 14</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                rnb isn’t a genre i particularly seek out, more so something i tangentially listen to because of its proximity to hip-hop. and maybe that’s the reason why i enjoy this album for its meld between hip-hop and alt rnb. there’s a fragility in jclef’s voice that makes you listen closer to what she has to say, but don’t be mistaken. the words she utters behind the veil of vulnerability are piercing. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://jclef.bandcamp.com/album/flaw-flaw')">bandcamp</button>
+                             <button onclick="window.open('https://open.spotify.com/album/0CGmukYin7kLhfjVamgyxy?si=bcdbe6d96e584431')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Misc (RnB)</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- waw -->
+                <div id="waw" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: Wild & Weak</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://images.genius.com/0ebe983a6fa6faa485acf195ab4e8d5c.520x520x1.jpg" alt="waax - wild & weak">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">WAAX</p>
+                            <p class="status-bar-field">Wild & Weak</p>
+                            <p class="status-bar-field">2017 - 06 - 02</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                waax brought me the sound i so desperately begged my favorite bands to return to with this record. the vocalist, Marie brings shaky and unstable quality to her performance that accentuates the uncertain and raw nature of this album. I love the more mature yet energetic punk-ness of their sound. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/1X4vsSLRddxdhJZvMkgFtw?si=03c90983b24c48aa')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Rock</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- mb -->
+                <div id="money" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: Money Breath</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://is5-ssl.mzstatic.com/image/thumb/Music124/v4/29/5a/ab/295aab03-6952-e17a-fb65-94d4c82b8199/8809784695998.jpg/1200x1200bf-60.jpg" alt="qm - money breath">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">QM</p>
+                            <p class="status-bar-field">돈숨<br>[Money Breath]</p>
+                            <p class="status-bar-field">2020 - 12 - 10</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                qm’s lyricism is undeniable. i have a particular fondness for deficiency expressed in lyrics. all the parts that we want other people not to notice, upfront and center. the shame, anger, and questions that qm paint are certainly relatable to me. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/6Yhynoz0adjSekgJunlYSG?si=a45f834b778c41a4')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Hip-Hop</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- mb -->
+                <div id="shallows" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: Into The Shallows</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://i.scdn.co/image/ab67616d0000b273e79e653cbab18f762ad6e9ea" alt="the rare occasions - into the shallows">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">The Rare Occasions</p>
+                            <p class="status-bar-field">Into The Shallows</p>
+                            <p class="status-bar-field">2018 - 02 - 25</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                i swear i knew them before they were famous on tiktok. i love the range of this album so much. a good mix of songs to lay down on the floor and wallow to, and songs to scream out loud while driving. just a good ol simple indie rock record. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://therareoccasions.bandcamp.com/album/into-the-shallows')">bandcamp</button>
+                             <button onclick="window.open('https://open.spotify.com/album/6Yhynoz0adjSekgJunlYSG?si=https://open.spotify.com/album/5qIjIdqOGtrbJSc1Htiod6?si=3d854a7f7faa4031')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Rock</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- TME -->
+                <div id="tme" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: TOO MANY EGOS</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://i.scdn.co/image/ab67616d0000b273bed885e83a0875c231fc12e2" alt="jerd - too many egos">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Jerd</p>
+                            <p class="status-bar-field">TOO MANY EGOS</p>
+                            <p class="status-bar-field">2019 - 01 - 28</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                though i’ve come across this album in my last year of high school, jerd’s lyrics that paint a creaky young adulthood were relatable. and as i’ve grown into the age that she was writing this album, it’s become more and more close to my heart. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/67TJC8L5eK2tVdOzJAU820?si=1b7e597027754c3d')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Misc (RnB)</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- orange -->
+                <div id="orange" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: channel ORANGE</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://i.scdn.co/image/ab67616d0000b2737aede4855f6d0d738012e2e5" alt="frank ocean - channel orange">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Frank Ocean</p>
+                            <p class="status-bar-field">channel ORANGE</p>
+                            <p class="status-bar-field">2012 - 07 - 10</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                i’ve come around from being a blonde hater but still, nothing tops how masterful channel orange is. it evokes so much summer nostalgia. not just in the beating sun, hot pavement type of way, but in the summer isolation, sinking into the bottom of the pool type way too. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/392p3shh2jkxUxY2VHvlH8?si=cec9679e0e3348e7')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Persistent Picks</p>
+                            <p class="status-bar-field">Misc (RnB)</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- sn -->
+                <div id="sn" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: The Social Network</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://i.scdn.co/image/ab67616d0000b273897cd4eeff3174110aa6230b" alt="trent reznor & atticus ross - the social network">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Trent Reznor & Atticus Ross</p>
+                            <p class="status-bar-field">The Social Network</p>
+                            <p class="status-bar-field">2010 - 09 - 28</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                ive watched the movie so much that the soundtrack has been ingrained in my mind for a while, but i never really listen to movie osts on their own so it’s just been stuck in the backburner for a while. but after deciding to put this on in the background while i was coding, everything just made sense. this really evokes such incomprehensible nostalgia in me.
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/1ijkFiMeHopKkHyvQCWxUa?si=79379bf361984e6a')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">(re)discoveries</p>
+                            <p class="status-bar-field">Electronic</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- gg -->
+                <div id="gg" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: Griselda Ghost</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://i1.sndcdn.com/artworks-000129054471-2hzgcm-t500x500.jpg" alt="big ghost ltd - griselda ghost">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Big Ghost Ltd + <br>Hall & Nash </p>
+                            <p class="status-bar-field">Griselda Ghost</p>
+                            <p class="status-bar-field">2015 - 09 - 11</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                as an avid drum sounds go BRRRRRRRR enjoyer, neo-boombap / drumless hip-hop eluded me for a while. sample heavy production was something i enjoyed even as a newcomer to the genre, but stripping down what was arguably one of the most defining features of the genre? thankfully big ghost ltd’s production brought the same energy and intensity as his reviews. convincing me that drumless can be as impactful to the eardrums as any other subgenre. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://bigghostlimited.bandcamp.com/album/griselda-ghost')">bandcamp</button>
+                             <button onclick="window.open('https://open.spotify.com/album/0ZGnDoF1tmUYBDdzG1gKIq?si=08969d4c713d4a0a')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">(re)discoveries</p>
+                            <p class="status-bar-field">Hip-Hop</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- atrocity -->
+                <div id="atrocity" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: Atrocity Exhibition</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/b/ba/AtrocityExhibition.jpg" alt="danny brown - atrocity exhibition">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Danny Brown</p>
+                            <p class="status-bar-field">Atrocity Exhibition</p>
+                            <p class="status-bar-field">2016 - 09 - 27</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                filthy as hell. this is such a raw ass fucking album in all the ways. danny’s lyrics, the way he raps those bars, and the production. THE PRODUCTION. if you only perceive experimental hip-hop as hip-hop with electronic or industrial beats, you need to listen to this album. it’s an exhilarating experience. fitting of its title.
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://dannybrown.bandcamp.com/album/atrocity-exhibition')">bandcamp</button>
+                             <button onclick="window.open('https://open.spotify.com/album/3A1vnUJDPz0xYMful9pO4I?si=69f54a713cca415b')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">(re)discoveries</p>
+                            <p class="status-bar-field">Hip-Hop</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- 2kzm -->
+                <div id="2kzm" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: 2kzm.zip</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="http://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/082/669/163/82669163_1651555890310_1_600x600.JPG" alt="dsel - 2kzm.zip">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">DSEL</p>
+                            <p class="status-bar-field">2kzm.zip</p>
+                            <p class="status-bar-field">2022 - 05 - 03</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                i’ve known of dsel since quite a while back, i thought he was a talented producer but felt like his rap was rather generic. he had his moments in previous 30 projects, but this was when i felt like he came to his full potential. the impact of his voice and the humor of the lyrics, along with the experimental beats come together to make something that can only be described as ‘dsel’.
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/7EOXELbZA810cVtrb2GS5p?si=9727633ad6274655')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">(re)discoveries</p>
+                            <p class="status-bar-field">Hip-Hop, Electronic</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- howmuch1 -->
+                <div id="hm1" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: HOWMUCH1</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://image.bugsm.co.kr/album/images/500/204810/20481018.jpg" alt="cwar - howmuch1">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">cwar</p>
+                            <p class="status-bar-field">HOWMUCH1</p>
+                            <p class="status-bar-field">2022 - 07 - 20</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                out of the several khh albums that ive listened to this year this album was one that i’ve enjoyed the production of so much. the lyrics stick around in your head and it’s incredibly hype to listen to this live, especially considering cwar’s energy on stage. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://open.spotify.com/album/0O2YV2vXNt6N0dWla76sxg?si=0262a782928a4cf8')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">(re)discoveries</p>
+                            <p class="status-bar-field">Hip-Hop, Electronic</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- rings -->
+                <div id="rings" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: ILHBWMRAMD</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://f4.bcbits.com/img/a2666809861_10.jpg" alt="backxwash - i lie here buried with my rings and my dresses">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Backxwash</p>
+                            <p class="status-bar-field">I LIE HERE BURIED WITH MY RINGS AND MY DRESSES</p>
+                            <p class="status-bar-field">2022 - 07 - 20</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                hoe scaring music. (im hoes)<br>
+                                backxwash was also one of the artists i’ve known about for a while but didn’t bother listening to mostly because of how hard to approach her aesthetic was. the sheer rawness and drive in her voice pulled me in and basically forced me to listen to the end. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://backxwash.bandcamp.com/album/i-lie-here-buried-with-my-rings-and-my-dresses')">bandcamp</button>
+                             <button onclick="window.open('https://open.spotify.com/album/4gaxRsSkSQmoyDsTesvplD?si=99077c4ea602420a')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">(re)discoveries</p>
+                            <p class="status-bar-field">Hip-Hop</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- forever -->
+                <div id="forever" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: Forever In Your Heart</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://media.pitchfork.com/photos/60340f810329c375908a7a2e/1:1/w_600/Black%20Dresses:%20Forever%20in%20Your%20Heart.jpg" alt="black dresses - forever in your heart">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">Black Dresses</p>
+                            <p class="status-bar-field">Forever In Your Heart</p>
+                            <p class="status-bar-field">2021 - 02 - 14</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                black dresses have been on my radar since quite a while thanks to my social circle. but i’ve never had the courage to try their music as i was still into quite ‘soft’ music back then. thankfully i’ve kept their name in my mind because once i mustered the strength i was blown back by the catharsis this album evoked in me. 
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://blackdresses.bandcamp.com/album/forever-in-your-heart')">bandcamp</button>
+                             <button onclick="window.open('https://open.spotify.com/album/09kEcsP2Lcx8g5f1CUeYsL?si=219c5ccfe3744690')">spotify</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">(re)discoveries</p>
+                            <p class="status-bar-field">Electronic, Rock</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
+                <!-- maniac -->
+                <div id="maniac" class="modal">
+                    <div class="window albumbox">
+                        <div class="title-bar">
+                            <div class="title-bar-text">Details: VIRTUAL WORLD MANIAC</div>
+                            <a href="#" rel="modal:close"><div class="title-bar-controls"><button aria-label="Close"></button></a></div>
+                        </div>
+                        <div class="album-image">
+                            <img src="https://i1.sndcdn.com/artworks-LqcidiVoyAxmlC7e-uuAc8A-t500x500.jpg" alt="RO - virtual world maniac">
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">RO</p>
+                            <p class="status-bar-field">VIRTUAL WORLD MANIAC</p>
+                            <p class="status-bar-field">2022 - 10 - 17</p>
+                        </div>
+                        <div class="window-body">
+                            <p>
+                                this was a gift youtube threw my way after noticing my watch history has been filled with breakcore and jersey club mixes. the influences are clear and loud, and whilst what could be classified as ‘genre cliches’ are present in the album, it does not sound derivative whatsoever.
+                            </p>
+                            <div class="album-button">
+                             <button onclick="window.open('https://youtu.be/Gu-vETUeRSY')">youtube</button>
+                             <button onclick="window.open('https://soundcloud.com/asian-roro/virtual-world-maniac')">soundcloud</button>
+                            </div>
+                        </div>
+                        <div class="status-bar">
+                            <p class="status-bar-field">(re)discoveries</p>
+                            <p class="status-bar-field">Electronic</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end -->
     <!-- chart start -->
 <div id="chart-container">
     <div class="window titlebox rank-box">
@@ -447,53 +1623,53 @@
             </ul>
     </div>
     <div class="chart-row" id="row-one">
-        <div class="chart-img-one item genre-1">
-            <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-one item genre-rock">
+            <a href="#corktree" rel="modal:open">
             <img src="https://upload.wikimedia.org/wikipedia/en/0/00/Fall_Out_Boy_-_From_Under_the_Cork_Tree_-_CD_album_cover.jpg" alt="fall out boy - from under the cork tree">
             </a>
         </div>
-        <div class="chart-img-one item genre-2">
-        <a href="#win95" rel="modal:open">
+        <div class="chart-img-one item genre-hiphop">
+        <a href="#doris" rel="modal:open">
             <img src="https://upload.wikimedia.org/wikipedia/en/4/40/Earl_Sweatshirt_Doris.jpg" alt="earl sweatshirt - doris">
         </a>
         </div>
-        <div class="chart-img-one item genre-3">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-one item genre-hiphop genre-electronic">
+        <a href="#yeezus" rel="modal:open">
             <img src="https://www.joerperez.com/wp-content/uploads/2013/06/YEEZUS_COVER-1-scaled.jpg" alt="kanye west - yeezus">
         </a>
         </div>
-        <div class="chart-img-one item genre-1 genre-3">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-one item genre-hiphop">
+        <a href="#busanmul" rel="modal:open">
             <img src="https://i1.sndcdn.com/artworks-000344073021-pcqfha-t500x500.jpg" alt="khundi panda - busanmul">
         </a>
         </div>
-        <div class="chart-img-one item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-one item genre-electronic">
+        <a href="#semantic" rel="modal:open">
             <img src="https://f4.bcbits.com/img/a0618266191_65" alt="goreshit - semantic compositions on death and its meaning">
         </a>
         </div>
-        <div class="chart-img-one item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-one item genre-rock">
+        <a href="#fever" rel="modal:open">
             <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/PanicAtTheDisco-FeverCover.jpg" alt="panic! at the disco - a fever you cant sweat out ">
         </a>
         </div>
-        <div class="chart-img-one item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-one item genre-hiphop">
+        <a href="#madvillainy" rel="modal:open">
             <img src="https://media.pitchfork.com/photos/5929c458ea9e61561daa811a/1:1/w_600/0bc6101d.jpg" alt="madvillain - madvillainy">
         </a>
         </div>
-        <div class="chart-img-one item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-one item genre-hiphop">
+        <a href="#bti" rel="modal:open">
             <img src="https://i.scdn.co/image/ab67616d0000b27345c853b6f83af97f5a22fac8" alt="childish gambino - because the internet">
         </a>
         </div>
-        <div class="chart-img-one item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-one item genre-misc">
+        <a href="#burbank" rel="modal:open">
             <img src="https://lastfm.freetls.fastly.net/i/u/ar0/d8c9a5c3c15e2d25df132cb47236a4fc.jpg" alt="joji - chloe burbank vol.1">
         </a>
         </div>
-        <div class="chart-img-one item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-one item genre-electronic">
+        <a href="#wlf" rel="modal:open">
             <img src="https://f4.bcbits.com/img/a1638146004_10.jpg" alt="machine girl - wlfgrl">
         </a>
         </div>
@@ -541,108 +1717,109 @@
             </ul>
     </div>
     <div class="chart-row" id="row-two">
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-electronic">
+        <a href="#product" rel="modal:open">
             <img src="https://upload.wikimedia.org/wikipedia/en/c/c7/Sophie_product.jpg" alt="sophie - product">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-hiphop">
+        <a href="#iii" rel="modal:open">
             <img src="https://upload.wikimedia.org/wikipedia/en/9/93/Brockhampton_-_Saturation_III.png" alt="brockhampton - saturation 3">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-hiphop">
+        <a href="#ksg" rel="modal:open">
             <img src="https://upload.wikimedia.org/wikipedia/en/4/44/Kids_See_Ghosts_Cover.png" alt="kids see ghosts - kids see ghosts">
         </a>
         </div>
         <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <a href="#white" rel="modal:open genre-rock">
             <img src="https://upload.wikimedia.org/wikipedia/en/d/d3/Cover_of_Weezer%27s_White_Album%2C2016.jpg" alt="weezer - weezer (white)">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-rock">
+        <a href="#bne" rel="modal:open">
             <img src="https://upload.wikimedia.org/wikipedia/en/9/9b/Paramore_-_Brand_New_Eyes.png" alt="paramore - brand new eyes">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-hiphop">
+        <a href="#wolf" rel="modal:open">
             <img src="https://upload.wikimedia.org/wikipedia/en/f/fd/Wolf_Cover2.jpg" alt="tyler, the creator - wolf">
         </a>
         </div>
-        <div class="chart-img-two item">
+        <div class="chart-img-two item genre-electronic">
         <a href="#feverdream" rel="modal:open">
             <img src="https://f4.bcbits.com/img/a0930597781_10.jpg" alt="fiend - fever dream">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-misc">
+        <a href="#mercurial" rel="modal:open">
             <img src="https://media.pitchfork.com/photos/60dca808316238f6226d24c8/1:1/w_600/Magdalena-Bay.jpeg" alt="magdalena bay - mercurial world">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-misc">
+        <a href="#han" rel="modal:open">
             <img src="https://i.scdn.co/image/ab67616d0000b273dc332c03c51dd1f87697571e" alt="berhana - han">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-hiphop">
+        <a href="#unlocked" rel="modal:open">
             <img src="https://media.pitchfork.com/photos/5e418e89159e01000820c1e8/1:1/w_600/Unlocked_Denzel%20Curry_Kenny%20Beats.jpg" alt="denzel curry & kenny beats - unlocked">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-hiphop genre-electronic">
+        <a href="#legend" rel="modal:open">
             <img src="https://i.scdn.co/image/ab67616d0000b273cd8430e6daeaf6df9a08ea99" alt="viann & son simba - a tale about the legend">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-hiphop genre-electronic">
+        <a href="#kyomi" rel="modal:open">
             <img src="https://i.scdn.co/image/ab67616d00001e0240905557158357e7491899f1" alt="xxx - kyomi">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-rock">
+        <a href="#htatm" rel="modal:open">
             <img src="https://media.pitchfork.com/photos/5e84a2cee21e4f0009eaf016/1:1/w_600/Heaven%20to%20a%20Tortured%20Mind_Yves%20Tumor.jpg" alt="yves tumor - heaven to a tortured mind">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-rock">
+            
+        <a href="#gn" rel="modal:open">
             <img src="https://i.discogs.com/kaq1m8IlaVocYnx3UQDIlnu_bkkk7YLdV2LmSLkFpyk/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExNDQ2/Njc0LTE1NDE5MDAz/MzMtOTE5Ni5qcGVn.jpeg" alt="the brobecks - goodnight, and have a pleasant tomorrow">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-misc">
+        <a href="#flaw" rel="modal:open">
             <img src="https://image.bugsm.co.kr/album/images/500/201862/20186256.jpg" alt="jclef - flaw, flaw">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-rock">
+        <a href="#waw" rel="modal:open">
             <img src="https://images.genius.com/0ebe983a6fa6faa485acf195ab4e8d5c.520x520x1.jpg" alt="waax - wild & weak">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-hiphop">
+        <a href="#money" rel="modal:open">
             <img src="https://is5-ssl.mzstatic.com/image/thumb/Music124/v4/29/5a/ab/295aab03-6952-e17a-fb65-94d4c82b8199/8809784695998.jpg/1200x1200bf-60.jpg" alt="qm - money breath">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-rock">
+        <a href="#shallows" rel="modal:open">
             <img src="https://i.scdn.co/image/ab67616d0000b273e79e653cbab18f762ad6e9ea" alt="the rare occasions - into the shallows">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-hiphop">
+        <a href="#veteran" rel="modal:open">
             <img src="https://upload.wikimedia.org/wikipedia/en/7/7e/JPEGMAFIA-Veteran_Cover.jpg" alt="jpegmafia - veteran">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-misc">
+        <a href="#tme" rel="modal:open">
             <img src="https://i.scdn.co/image/ab67616d0000b273bed885e83a0875c231fc12e2" alt="jerd - too many egos">
         </a>
         </div>
-        <div class="chart-img-two item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-two item genre-misc">
+        <a href="#orange" rel="modal:open">
             <img src="https://i.scdn.co/image/ab67616d0000b2737aede4855f6d0d738012e2e5" alt="frank ocean - channel orange">
         </a>
         </div>
@@ -679,53 +1856,53 @@
             </ul>
     </div>
     <div class="chart-row" id="row-three">
-        <div class="chart-img-three item">
+        <div class="chart-img-three item genre-electronic genre-hiphop">
         <a href="#win95" rel="modal:open">
             <img src="https://images.genius.com/f6cc3900926420ce1d9757c2b95076cf.1000x1000x1.jpg" alt="lee hyun jun - lost in translation">
         </a>
         </div>
-        <div class="chart-img-three item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-three item genre-electronic">
+        <a href="#sn" rel="modal:open">
             <img src="https://i.scdn.co/image/ab67616d0000b273897cd4eeff3174110aa6230b" alt="trent reznor & atticus ross - the social network">
         </a>
         </div>
-        <div class="chart-img-three item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-three item genre-electronic">
+        <a href="#maybe" rel="modal:open">
             <img src="https://i.discogs.com/68gPZmJdCsScfWZ7RVxHsdqN0kYG5pGjy1zrkD0fqUQ/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQyMTQ2/NzQtMTQwOTY2MTQ1/My04NDQ3LmpwZWc.jpeg" alt="renard - because maybe">
         </a>
         </div>
-        <div class="chart-img-three item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-three item genre-hiphop">
+        <a href="#gg" rel="modal:open">
             <img src="https://i1.sndcdn.com/artworks-000129054471-2hzgcm-t500x500.jpg" alt="big ghost ltd - griselda ghost">
         </a>
         </div>
-        <div class="chart-img-three item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-three item genre-hiphop">
+        <a href="#atrocity" rel="modal:open">
             <img src="https://upload.wikimedia.org/wikipedia/en/b/ba/AtrocityExhibition.jpg" alt="danny brown - atrocity exhibition">
         </a>
         </div>
-        <div class="chart-img-three item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-three item genre-hiphop">
+        <a href="#2kzm" rel="modal:open">
             <img src="http://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/082/669/163/82669163_1651555890310_1_600x600.JPG" alt="dsel - 2kzm.zip">
         </a>
         </div>
-        <div class="chart-img-three item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-three item genre-electronic">
+        <a href="#hm1" rel="modal:open">
             <img src="https://image.bugsm.co.kr/album/images/500/204810/20481018.jpg" alt="cwar - howmuch1">
         </a>
         </div>
-        <div class="chart-img-three item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-three item genre-hiphop">
+        <a href="#rings" rel="modal:open">
             <img src="https://f4.bcbits.com/img/a2666809861_10.jpg" alt="backxwash - i lie here buried with my rings and my dresses">
         </a>
         </div>
-        <div class="chart-img-three item">
-            <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-three item genre-rock genre-electronic">
+            <a href="#forever" rel="modal:open">
                 <img src="https://media.pitchfork.com/photos/60340f810329c375908a7a2e/1:1/w_600/Black%20Dresses:%20Forever%20in%20Your%20Heart.jpg" alt="black dresses - forever in your heart">
             </a>
             </div>
-        <div class="chart-img-three item">
-        <a href="#placeholder" rel="modal:open">
+        <div class="chart-img-three item genre-electronic">
+        <a href="#maniac" rel="modal:open">
             <img src="https://i1.sndcdn.com/artworks-LqcidiVoyAxmlC7e-uuAc8A-t500x500.jpg" alt="RO - virtual world maniac">
         </a>
         </div>
