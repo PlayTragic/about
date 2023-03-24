@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <style>
+    @import "https://unpkg.com/xp.css";
+    body{
+        height: 90vh;
+        background: linear-gradient(120deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);
+        background-size: cover;
+        overflow-y: auto !important; 
+
+    }
+    .bg-wave{
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background: linear-gradient( #76b852, #8dc26f);
+        border-radius: 31% 76% 0% 0% / 44% 87% 0% 0%;
+        transform: scale(1.3);
+    }
+    .bg{
+        height: 25%;
+        width: 100vw;
+        padding: 0;
+        margin: 0;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: -50;
+    }
+    .container{
+        height: 100%;
+        margin: 5vh 5vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .window{
+        width: 100%;
+        min-width: 30vw;
+        min-height: 50vh;
+        max-width: 50rem;
+        font-family: "Tahoma";
+        font-size: 11pt;
+        position: relative;
+    }
+    .navbuttons{
+        display: flex;
+        width: 100%;
+        box-sizing: border-box;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+    .status-bar{
+        justify-content: flex-end;
+        padding: 0.7rem;
+        width: 100%;
+        gap: 0.2rem;
+    }
+    .field-row-stacked{
+        padding: 0.5rem;
+    }
+    .p1Container{
+        display: flex;
+    }
+    .p1Content{
+        width: 70%;
+        margin: 0.2rem 1rem;
+    }
+    .p1Image{
+        width: 30%;
+    }
+    .p1Image img{
+        position: absolute;
+        left: 3px;
+        top: 28px;
+        width: 30%;
+        height: calc(100% - (51px + 1.4rem));
+        object-fit: cover;
+    }
+    .bottomText{
+        position: absolute;
+        bottom: 60px;
+    }
+    #cancelBtn{
+        margin-left: 1rem;
+    }
+    h5{
+        font-size: 13pt;
+        margin: 1rem 0;
+    }
+    label, input{
+        font-size: 11pt;
+        font-family: "Tahoma";
+    }
+    input{
+        font-size: 9pt;
+    }
+    @media (max-width:480px){
+        .bg-wave{
+            transform: scale(1.2);
+            border-radius: 37% 58% 0% 0% / 16% 36% 0% 0%;
+        }
+        .tab{
+            overflow-y: auto;
+            height: calc(45vh - (23px + 1.4rem));
+        }
+        .bottomText{
+            position: static;
+
+        }
+    }
+    </style>
+    <script>
+        $(document).ready(function(){
+            let index = 1;
+            let indexLimit = $('.tab:last-of-type').attr('id').substr(-1);
+            $('.tab').hide();
+            $('#page'+index).show();
+
+            function changeTitle(){
+                let titleText;
+                console.log(index);
+                switch(index){
+                    case 1:
+                        titleText = 'INSTALLING: Needless Information'
+                        break;
+                    case 2:
+                        titleText = 'EXPLANATION: Topster'
+                        break;
+                    case 3:
+                        titleText = "what's the point of this all."
+                        break;
+                    case 4:
+                        titleText = 'mf got the yee yee ass ugly website'
+                        break;
+                    default:
+                        titleText = 'something got fucked up.. how did you do that'
+                }
+                $('.title-bar-text').html(titleText);
+            }
+
+            $('#nextBtn').click(function(){
+                console.log('next');
+                index++;
+                if(index == indexLimit){
+                    $('#nextBtn').prop('disabled', true);
+                }
+                $('.tab').hide();
+                $('#page'+index).show();
+                $('#backBtn').prop('disabled', false);
+                changeTitle();
+            })
+            $('#backBtn').click(function(){
+                console.log('back');
+                index--;
+                $('.tab').hide();
+                $('#page'+index).show();
+                $('#nextBtn').prop('disabled', false);
+                if(index == 1){
+                $('#backBtn').prop('disabled', true);
+                }
+                changeTitle();
+            })
+            $('#cancelBtn').click(function(){
+                changeTitle();
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="bg">
+        <div class="bg-wave">
+        </div>
+    </div>
+    <div class="container">
+    <div class="window">
+        <div class="title-bar">
+            <div class="title-bar-text">INSTALLING: Needless Information</div>
+            <div class="title-bar-controls">
+                <button aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body">
+
+                <div id="page1" class="tab">
+                    <div class="p1Container">
+                        <div class="p1Image">
+                            <img src="https://images.unsplash.com/photo-1562619425-c307bb83bc42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+                        </div>
+                        <div class="p1Content">
+                            <h5>Welcome to the Needless Explanation Install Wizard</h5>
+                            <br>
+                            This wizard will install:
+                            <ul>
+                            <li>what a topster is.</li>
+                            <li>why I made this site.</li>
+                            <li>my thoughts after making this site.</li>
+                            </ul>
+                            to the following folder.
+                            <br>
+                            <div class="field-row-stacked">
+                                <label for="folder">Folder: </label>
+                                <input id="folder" type="text" disabled value="B:/Brain Files/Useless Information"/>
+                            </div>
+                            <span class="bottomText">
+                            To continue, click Next.  To return to the previous page, click Cancel.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div id="page2" class="tab">
+                    Irure occaecat labore sint id nulla aliquip deserunt ut aliqua esse exercitation mollit. Deserunt mollit esse aliqua occaecat officia aliqua laboris occaecat. Amet irure do minim minim mollit veniam consequat ea anim duis. Qui excepteur culpa dolore duis ut esse enim enim voluptate sint.
+                    <br><br>
+                    Minim deserunt fugiat aliqua eiusmod ad laborum culpa nisi dolor eiusmod veniam labore cupidatat. Laborum mollit esse reprehenderit dolore nulla nulla mollit incididunt deserunt. Esse adipisicing mollit fugiat elit laborum aliquip adipisicing aute culpa labore. Deserunt deserunt exercitation voluptate id consequat velit aute excepteur. Nulla elit laboris laboris anim amet sit tempor Lorem cupidatat voluptate culpa fugiat est. Cillum minim qui exercitation velit sint.
+                    <br><br>
+                    Occaecat laborum tempor veniam sint deserunt anim quis consequat aliquip commodo nisi consectetur eu Lorem. Officia dolore cupidatat amet eu in laborum magna non. Ex laboris ea non irure consequat consequat quis anim enim excepteur nulla.
+                <div id="page3" class="tab">
+                    <img src="https://64.media.tumblr.com/8a4df961cea14fe5dd16bc4db4874ec4/ad3b2676751c553f-e2/s540x810/d9824c10455fe2e134d86bc23fd618c24bd71a77.pnj" alt="">
+                </div>
+                <div id="page4" class="tab">
+                    Excepteur occaecat elit amet Lorem velit sunt adipisicing labore ea sit excepteur consequat ad mollit. Velit aliquip ullamco minim incididunt fugiat. Pariatur in elit est ullamco veniam cupidatat nostrud eiusmod occaecat fugiat fugiat ut sint. Fugiat aute mollit reprehenderit tempor.
+                    <br>
+                    Id qui amet duis in nisi adipisicing ad ipsum. Lorem laboris cillum sint commodo excepteur in. Mollit elit aute ut do reprehenderit cillum eiusmod est veniam. Veniam magna ut labore incididunt minim magna pariatur reprehenderit. Lorem voluptate non excepteur reprehenderit non nostrud eu. Non ut occaecat cillum occaecat amet consequat exercitation.
+                </div>
+
+            </div>
+            <div class="navbuttons">
+            <div class="status-bar">
+                    <button id="backBtn" disabled >&lt;&nbsp;&nbsp;&nbsp;Back</button>
+                    <button id="nextBtn">Next&nbsp;&nbsp;&nbsp;&gt;</button>
+                    <button id="cancelBtn">Cancel</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
