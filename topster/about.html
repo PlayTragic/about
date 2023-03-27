@@ -7,6 +7,8 @@
     <title>ABOUT</title>
     <link rel="icon" type="image/x-icon" href="https://em-content.zobj.net/thumbs/120/apple/325/exclamation-question-mark_2049-fe0f.png">
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     <style>
     @import "https://unpkg.com/xp.css";
     body{
@@ -43,13 +45,17 @@
         align-items: center;
     }
     .window{
+        aspect-ratio: 3/2;
         width: 100%;
         min-width: 30vw;
-        min-height: 50vh;
         max-width: 50rem;
         font-family: "Tahoma";
         font-size: 11pt;
         position: relative;
+    }
+    .window-body{
+        height: calc(100% - (59px + 1.4rem));
+        overflow-y: auto;
     }
     .navbuttons{
         display: flex;
@@ -70,10 +76,11 @@
     }
     .p1Container{
         display: flex;
+        justify-content: flex-end;
     }
     .p1Content{
-        width: 70%;
-        margin: 0.2rem 1rem;
+        width: 65%;
+        margin: 0;
     }
     .p1Image{
         width: 30%;
@@ -90,6 +97,68 @@
         position: absolute;
         bottom: 60px;
     }
+    .gallery{
+        margin: 8px 16px 8px  8px;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .imgbox{
+        flex: 0 0 49%;
+        min-width: 17rem;
+    }
+    .imgbox img{
+        object-fit: contain;
+        width: 100%;
+        transition: all .2s ease-in-out;
+    }
+    .imgbox:hover img{
+        transform: scale(1.1);
+    }
+    .modal{
+        max-width:none;
+        width: 100%;
+        padding: 0;
+    }
+    .modalimg{
+        width: auto;
+    }
+    .modalimg img{
+        object-fit: contain;
+        width: 100%;
+    }
+    .modal a.close-modal{
+        display: none;
+    }
+    .modal .window{
+        max-width: none;
+    }
+    .modal .window-body{
+        height: auto;
+    }
+    .controls{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.2rem;
+    }
+    .p3Container{
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    .p3Img{
+        margin: 0.5rem 1rem;
+        max-width: 5rem;
+    }
+    .p3Content{
+        margin: 1.5rem 0;
+    }
+    .bold{
+        font-weight: 600;
+    }
+
     #cancelBtn{
         margin-left: 1rem;
     }
@@ -110,7 +179,6 @@
             border-radius: 37% 58% 0% 0% / 16% 36% 0% 0%;
         }
         .tab{
-            overflow-y: auto;
             height: calc(45vh - (23px + 1.4rem));
         }
         .bottomText{
@@ -118,14 +186,16 @@
 
         }
     }
+
     </style>
     <script>
         $(document).ready(function(){
             let index = 1;
-            let indexLimit = $('.tab:last-of-type').attr('id').substr(-1);
+            let indexLimit = $('.tab').length;
+            let modalIndex = 0;
+            let modalIndexLimit = $('.modal').length;
             $('.tab').hide();
             $('#page'+index).show();
-
             function changeTitle(){
                 let titleText;
                 console.log(index);
@@ -137,10 +207,7 @@
                         titleText = 'EXPLANATION: Topster'
                         break;
                     case 3:
-                        titleText = "what's the point of this all."
-                        break;
-                    case 4:
-                        titleText = 'mf got the yee yee ass ugly website'
+                        titleText = "INFORMATION: Why?"
                         break;
                     default:
                         titleText = 'something got fucked up.. how did you do that'
@@ -174,10 +241,103 @@
             $('#cancelBtn').click(function(){
                 changeTitle();
             })
+            $('.modal').on($.modal.OPEN, function(){
+                modalIndex =  parseInt($(this).attr('id').substr(-1));
+                if(modalIndex <= 1){
+                    $('.backModal').prop('disabled', true);
+                }else{
+                    $('.backModal').prop('disabled', false);
+                }
+                if(modalIndex >= modalIndexLimit){
+                    $('.nextModal').prop('disabled', true);
+                }else{
+                    $('.nextModal').prop('disabled', false);
+                }
+            })
+            $('.backModal').click(function(){
+                modalIndex--;
+                $('#topster'+modalIndex).modal();
+                console.log('modal back');
+                /* console.log('#topster'+modalIndex) */
+            })
+            $('.nextModal').click(function(){
+                modalIndex++;
+                $('#topster'+modalIndex).modal();
+                console.log('modal next');
+                /* console.log('#topster'+modalIndex) */
+            })
         })
     </script>
 </head>
 <body>
+    <!-- modal -->
+    <div id="topster1" class="modal">
+        <div class="modalimg">
+            <div class="window">
+                <div class="title-bar">
+                    <div class="title-bar-text">Topster 1 - Picture Viewer</div>
+                    <div class="title-bar-controls">
+                        <a href="#" rel="modal:close">
+                        <button aria-label="Close"></button>
+                        </a>
+                    </div>
+                </div>
+                <div class="window-body">
+            <img src="https://media.discordapp.net/attachments/765453453563789333/1089780779606876190/3.23.23TOPSTER.png?width=959&height=579" alt="">
+            <div class="controls">
+                <button class="backModal" >&lt;&nbsp;&nbsp;&nbsp;Back</button>
+                <progress max="3" value="1"></progress>
+                <button class="nextModal">Next&nbsp;&nbsp;&nbsp;&gt;</button>
+            </div>
+            </div>
+        </div>
+        </div>
+      </div>
+    <div id="topster2" class="modal">
+        <div class="modalimg">
+            <div class="window">
+                <div class="title-bar">
+                    <div class="title-bar-text">Topster 2 - Picture Viewer</div>
+                    <div class="title-bar-controls">
+                        <a href="#" rel="modal:close">
+                        <button aria-label="Close"></button>
+                        </a>
+                    </div>
+                </div>
+                <div class="window-body">
+            <img src="https://pbs.twimg.com/media/FgYz4SnaYAERN0U?format=jpg&name=4096x4096" alt="">
+            <div class="controls">
+                <button class="backModal" >&lt;&nbsp;&nbsp;&nbsp;Back</button>
+                <progress max="3" value="2"></progress>
+                <button class="nextModal">Next&nbsp;&nbsp;&nbsp;&gt;</button>
+            </div>
+            </div>
+        </div>
+        </div>
+      </div>
+    <div id="topster3" class="modal">
+        <div class="modalimg">
+            <div class="window">
+                <div class="title-bar">
+                    <div class="title-bar-text">Topster 3 - Picture Viewer</div>
+                    <div class="title-bar-controls">
+                        <a href="#" rel="modal:close">
+                        <button aria-label="Close"></button>
+                        </a>
+                    </div>
+                </div>
+                <div class="window-body">
+            <img src="https://media.discordapp.net/attachments/540189022224515105/1089778965582970880/topsters21.png?width=918&height=835" alt="">
+            <div class="controls">
+                <button class="backModal" >&lt;&nbsp;&nbsp;&nbsp;Back</button>
+                <progress max="3" value="3"></progress>
+                <button class="nextModal">Next&nbsp;&nbsp;&nbsp;&gt;</button>
+            </div>
+            </div>
+        </div>
+        </div>
+      </div>
+
     <div class="bg">
         <div class="bg-wave">
         </div>
@@ -219,21 +379,46 @@
                     </div>
                 </div>
                 <div id="page2" class="tab">
-                    Irure occaecat labore sint id nulla aliquip deserunt ut aliqua esse exercitation mollit. Deserunt mollit esse aliqua occaecat officia aliqua laboris occaecat. Amet irure do minim minim mollit veniam consequat ea anim duis. Qui excepteur culpa dolore duis ut esse enim enim voluptate sint.
-                    <br><br>
-                    Minim deserunt fugiat aliqua eiusmod ad laborum culpa nisi dolor eiusmod veniam labore cupidatat. Laborum mollit esse reprehenderit dolore nulla nulla mollit incididunt deserunt. Esse adipisicing mollit fugiat elit laborum aliquip adipisicing aute culpa labore. Deserunt deserunt exercitation voluptate id consequat velit aute excepteur. Nulla elit laboris laboris anim amet sit tempor Lorem cupidatat voluptate culpa fugiat est. Cillum minim qui exercitation velit sint.
-                    <br><br>
-                    Occaecat laborum tempor veniam sint deserunt anim quis consequat aliquip commodo nisi consectetur eu Lorem. Officia dolore cupidatat amet eu in laborum magna non. Ex laboris ea non irure consequat consequat quis anim enim excepteur nulla.
+                    what's a topster? in short, it's a collage of albums that the maker picked out. most of the time filled with cuts that they enjoy a lot, or have had a lot of impact on the person. a visual and compact way of describing your music taste. here's a few topsters from me and my friends as an example.
+                    <div class="gallery">
+                        <div class="imgbox">
+                            <a href="#topster1" rel="modal:open">
+                            <img src="https://media.discordapp.net/attachments/765453453563789333/1089780779606876190/3.23.23TOPSTER.png?width=959&height=579" alt="example 1">
+                            </a>
+                        </div>
+                        <div class="imgbox">
+                            <a href="#topster2" rel="modal:open">
+                            <img src="https://pbs.twimg.com/media/FgYz4SnaYAERN0U?format=jpg&name=4096x4096" alt="example 2">
+                            </a>
+                        </div>
+                        <div class="imgbox">
+                            <a href="#topster3" rel="modal:open">
+                            <img src="https://media.discordapp.net/attachments/540189022224515105/1089778965582970880/topsters21.png?width=918&height=835" alt="example 3">
+                            </a>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div id="page3" class="tab">
-                    <img src="https://64.media.tumblr.com/8a4df961cea14fe5dd16bc4db4874ec4/ad3b2676751c553f-e2/s540x810/d9824c10455fe2e134d86bc23fd618c24bd71a77.pnj" alt="">
+                    <div class="p3Container">
+                        <div class="p3Img">
+                            <img src="https://media.discordapp.net/attachments/540189022224515105/1089790055066906654/srchui.dll_14_24-3.png" alt="">
+                        </div>
+                        <div class="p3Content">
+                            <span class="bold">
+                                it was sort... of a test on my abilities in making a site.
+                            </span>
+                            <br><br>
+                            though i've been doing web design for quite.. a bit, i never particularly made an 'interactive' site with functionality. for some reason? a lot of my work came down to fixing up certain parts of a site, and even my own personal projects had minimal interactivity because of my lack of ideas.
+                            <br><br>
+                            i already had a blog aggregating my reviews of korean hip hop albums i've enjoyed, but i wanted to make something that painted my tastes a bit more wider than just the albums i write long form reviews about. i got inspired by 'topsters' shared among other likeminded music nerds and got to work. 
+                            <br><br>
+                            although i loved how succinct posting an image of a topster is, and how easily it could spark a conversation between other people who overlap with my taste in music. i wanted a place to talk about my favorite albums in more depth, but without the commitment of a full on album review.
+                            <br><br>
+                            as you can see, the site's aesthetics are heavily derived from windows xp. i didn't particularly have an aesthetic in mind when i came up with the idea, and im not really the most creative person out there when it comes to coming up with a consistent style of a site. so i utilized the XP.css framework i've been eyeing for a while. it's fitting considering i grew up with winXP alongside the music on the chart. 
+                        </div>
+                    </div>
                 </div>
-                <div id="page4" class="tab">
-                    Excepteur occaecat elit amet Lorem velit sunt adipisicing labore ea sit excepteur consequat ad mollit. Velit aliquip ullamco minim incididunt fugiat. Pariatur in elit est ullamco veniam cupidatat nostrud eiusmod occaecat fugiat fugiat ut sint. Fugiat aute mollit reprehenderit tempor.
-                    <br>
-                    Id qui amet duis in nisi adipisicing ad ipsum. Lorem laboris cillum sint commodo excepteur in. Mollit elit aute ut do reprehenderit cillum eiusmod est veniam. Veniam magna ut labore incididunt minim magna pariatur reprehenderit. Lorem voluptate non excepteur reprehenderit non nostrud eu. Non ut occaecat cillum occaecat amet consequat exercitation.
-                </div>
-
             </div>
             <div class="navbuttons">
             <div class="status-bar">
