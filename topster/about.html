@@ -97,6 +97,9 @@
         position: absolute;
         bottom: 60px;
     }
+    .p2Container{
+        margin: 0 8px 0 0;
+    }
     .gallery{
         margin: 8px 16px 8px  8px;
         display: flex;
@@ -107,11 +110,13 @@
     .imgbox{
         flex: 0 0 49%;
         min-width: 17rem;
+        overflow: hidden;
     }
     .imgbox img{
         object-fit: contain;
         width: 100%;
         transition: all .2s ease-in-out;
+        
     }
     .imgbox:hover img{
         transform: scale(1.1);
@@ -143,15 +148,18 @@
         justify-content: center;
         align-items: center;
         gap: 0.2rem;
+        padding: 0.5rem;
     }
     .p3Container{
         display: flex;
         align-items: flex-start;
         gap: 0.5rem;
+        margin: 0 8px 0 0;
     }
     .p3Img{
         margin: 0.5rem 1rem;
         max-width: 5rem;
+        
     }
     .p3Content{
         margin: 1.5rem 0;
@@ -298,6 +306,7 @@
         </div>
         </div>
       </div>
+
     <div id="topster2" class="modal">
         <div class="modalimg">
             <div class="window">
@@ -320,6 +329,7 @@
         </div>
         </div>
       </div>
+
     <div id="topster3" class="modal">
         <div class="modalimg">
             <div class="window">
@@ -384,22 +394,24 @@
                     </div>
                 </div>
                 <div id="page2" class="tab">
-                    what's a topster? in short, it's a collage of albums that the maker picked out. most of the time filled with cuts that they enjoy a lot, or have had a lot of impact on the person. a visual and compact way of describing your music taste. here's a few topsters from me and my friends as an example.
-                    <div class="gallery">
-                        <div class="imgbox">
-                            <a href="#topster1" rel="modal:open">
-                            <img src="https://media.discordapp.net/attachments/765453453563789333/1089780779606876190/3.23.23TOPSTER.png?width=959&height=579" alt="example 1">
-                            </a>
-                        </div>
-                        <div class="imgbox">
-                            <a href="#topster2" rel="modal:open">
-                            <img src="https://pbs.twimg.com/media/FgYz4SnaYAERN0U?format=jpg&name=4096x4096" alt="example 2">
-                            </a>
-                        </div>
-                        <div class="imgbox">
-                            <a href="#topster3" rel="modal:open">
-                            <img src="https://media.discordapp.net/attachments/540189022224515105/1089778965582970880/topsters21.png?width=918&height=835" alt="example 3">
-                            </a>
+                    <div class="p2Container">
+                        what's a topster? in short, it's a collage of albums that the maker picked out. most of the time filled with cuts that they enjoy a lot, or have had a lot of impact on the person. a visual and compact way of describing your music taste. here's a few topsters from me and my friends as an example.
+                        <div class="gallery">
+                            <div class="imgbox">
+                                <a href="#topster1" rel="modal:open">
+                                <img src="https://media.discordapp.net/attachments/765453453563789333/1089780779606876190/3.23.23TOPSTER.png?width=959&height=579" alt="example 1">
+                                </a>
+                            </div>
+                            <div class="imgbox">
+                                <a href="#topster2" rel="modal:open">
+                                <img src="https://pbs.twimg.com/media/FgYz4SnaYAERN0U?format=jpg&name=4096x4096" alt="example 2">
+                                </a>
+                            </div>
+                            <div class="imgbox">
+                                <a href="#topster3" rel="modal:open">
+                                <img src="https://media.discordapp.net/attachments/540189022224515105/1089778965582970880/topsters21.png?width=918&height=835" alt="example 3">
+                                </a>
+                            </div>
                         </div>
                     </div>
                     
@@ -418,9 +430,15 @@
                             <br><br>
                             i already had a blog aggregating my reviews of korean hip hop albums i've enjoyed, but i wanted to make something that painted my tastes a bit more wider than just the albums i write long form reviews about. i got inspired by 'topsters' shared among other likeminded music nerds and got to work. 
                             <br><br>
-                            although i loved how succinct posting an image of a topster is, and how easily it could spark a conversation between other people who overlap with my taste in music. i wanted a place to talk about my favorite albums in more depth, but without the commitment of a full on album review.
+                            although i loved how succinct posting an image of a topster is, and how easily it could spark a conversation between other people who overlap with my taste in music. i wanted a place to talk about my favorite albums in more depth, but without the commitment of a full on album review. which is why i decided to make this site.
                             <br><br>
                             as you can see, the site's aesthetics are heavily derived from windows xp. i didn't particularly have an aesthetic in mind when i came up with the idea, and im not really the most creative person out there when it comes to coming up with a consistent style of a site. so i utilized the XP.css framework i've been eyeing for a while. it's fitting considering i grew up with winXP alongside the music on the chart. 
+                            <br><br>
+                            i'm not particularly fond of how i went about making this site and how it looks, i had to go through some stupid workarounds for certain things, but what matters is that i finished it. right? guys?
+                            <br><br>
+                            the reviews are especially something... but you know, sometimes an album is good cause it's good, and sometimes it's good cause i was sixteen when i first listened to it.
+                            <br><br>
+                            in the end, it was good practice in working with and around pre-existing libraries, flexboxes (you can never practice flexboxes enough), trying to make the mobile version usable (keyword: trying), and studying existing UI's and emulating it. 3/10 would not recommend this for a portfolio project. thank god i don't plan on moving jobs anytime soon.
                         </div>
                     </div>
                 </div>
